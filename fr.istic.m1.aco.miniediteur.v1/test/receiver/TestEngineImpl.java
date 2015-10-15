@@ -1,5 +1,6 @@
 package receiver;
 
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,7 +20,7 @@ public class TestEngineImpl {
 		engine = new EngineImpl(selection, clipboard, buffer);
 	}
 	
-	@Test
+	@Test 
 	public void testCopy() {
 		buffer.setText("value1");
 		selection.setStart(0);

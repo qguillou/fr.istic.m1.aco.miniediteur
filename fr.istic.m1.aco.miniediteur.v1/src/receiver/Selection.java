@@ -33,8 +33,11 @@ public class Selection {
 	 * setStart()
 	 * Update the index of selection position
 	 * @param start: new index of selection position
+	 * @throws NumberFormatException
 	 */
-	public void setStart(int start) {
+	public void setStart(int start) throws NumberFormatException {
+		if(start < 0)
+			throw new NumberFormatException();
 		this.start = start;
 	}
 	
@@ -49,8 +52,11 @@ public class Selection {
 	/**
 	 * Update the length of selection
 	 * @param length: new length of selection
+	 * @throws NumberFormatException
 	 */
-	public void setLength(int length) {
+	public void setLength(int length) throws NumberFormatException {
+		if(start < 0)
+			throw new NumberFormatException();
 		this.length = length;
 	}
 }
