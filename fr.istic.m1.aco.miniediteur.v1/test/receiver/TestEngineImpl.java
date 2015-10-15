@@ -88,7 +88,7 @@ public class TestEngineImpl {
 		selection.setStart(5);
 		selection.setLength(0);
 		engine.type();
-		Assert.assertTrue("Type() - Type hasn't updated Selection variables", selection.getLength() == 0 && selection.getStart() == 6);
+		Assert.assertTrue("Type() - Type hasn't updated Selection variables", selection.getLength() == 0 && selection.getStart() == 5);
 		Assert.assertTrue("Type() - Text doesn't been updated in Buffer", buffer.getText().equals("value"));
 		
 		//Test with selected text
@@ -96,7 +96,7 @@ public class TestEngineImpl {
 		selection.setStart(1);
 		selection.setLength(4);
 		engine.type();
-		Assert.assertTrue("Type() with selected text - Type hasn't updated Selection variables", selection.getLength() == 0 && selection.getStart() == 2);
+		Assert.assertTrue("Type() with selected text - Type hasn't updated Selection variables", selection.getLength() == 0 && selection.getStart() == 1);
 		Assert.assertTrue("Type() with selected text - Text doesn't been updated in Buffer", buffer.getText().equals("v"));
 	}
 

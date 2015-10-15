@@ -15,7 +15,7 @@ public class EngineImpl implements EditorEngine {
 	/**
 	 * EngineImpl() - Constructor
 	 * @param selection: the Selection object
-	 * @param clipboard: the Clipoard of application
+	 * @param clipboard: the Clipboard of application
 	 * @param buffer: the Buffer of application
 	 */
 	public EngineImpl(Selection selection, ClipBoard clipboard, Buffer buffer){
