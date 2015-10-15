@@ -34,5 +34,14 @@ public class TestSelection {
 		selection.setLength(1);
 		Assert.assertTrue("setLength() - ", selection.getLength() == 1);
 	}
-
+	
+	@Test (expected=NumberFormatException.class)
+	public void testSetLengthException() {
+		selection.setLength(-1);
+	}
+	
+	@Test (expected=NumberFormatException.class)
+	public void testSetStartException() {
+		selection.setStart(-1);
+	}
 }

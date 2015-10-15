@@ -37,7 +37,7 @@ public class Selection {
 	 */
 	public void setStart(int start) throws NumberFormatException {
 		if(start < 0)
-			throw new NumberFormatException();
+			throw new NumberFormatException("Error occur - Start index of selection is negative");
 		this.start = start;
 	}
 	
@@ -55,8 +55,8 @@ public class Selection {
 	 * @throws NumberFormatException
 	 */
 	public void setLength(int length) throws NumberFormatException {
-		if(start < 0)
-			throw new NumberFormatException();
+		if(length < 0)
+			throw new NumberFormatException("Error occur - Length of selection is negative");
 		this.length = length;
 	}
 }
