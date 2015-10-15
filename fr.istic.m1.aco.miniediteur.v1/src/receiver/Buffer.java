@@ -1,5 +1,7 @@
 package receiver;
 
+import java.security.InvalidParameterException;
+
 
 /**
  * Buffer
@@ -17,6 +19,18 @@ public class Buffer {
 	 */
 	public Buffer(){
 		this.text = new StringBuffer();
+	}
+	
+	/**
+	 * checkParametersSelection()
+	 * if start bigger than end throw InvalidParameterException
+	 * @param start: the start index of selection
+	 * @param end: the end index of selection
+	 * @throws InvalidParameterException
+	 */
+	private void checkParametersSelection(int start, int end) throws InvalidParameterException{
+		if(start > end)
+			throw new InvalidParameterException("Error occur - Start index of selection is bigger than end index");
 	}
 	
 	/**
@@ -43,6 +57,8 @@ public class Buffer {
 	 * @return String: the text to cut
 	 */
 	public String cut(int start, int end){
+		this.checkParametersSelection(start, end);
+		
 		String select_text = this.text.substring(start, end);
 		this.text = this.text.delete(start, end);
 		return select_text;
@@ -56,6 +72,8 @@ public class Buffer {
 	 * @param end: the end of selection
 	 */
 	public void paste(String text, int start, int end){
+		this.checkParametersSelection(start, end);
+		
 		this.text = this.text.delete(start, end);
 		this.text = this.text.insert(start, text);
 	}
@@ -68,6 +86,8 @@ public class Buffer {
 	 * @return String: the text to copy
 	 */
 	public String copy(int start, int end){
+		this.checkParametersSelection(start, end);
+		
 		return this.text.substring(start, end);
 	}
 	
@@ -78,6 +98,8 @@ public class Buffer {
 	 * @param end: the end index of end text
 	 */
 	public void erase(int start, int end){
+		this.checkParametersSelection(start, end);
+		
 		this.text = this.text.delete(start, end);
 	}
 	
@@ -89,6 +111,8 @@ public class Buffer {
 	 * @param end: the end index of selection
 	 */
 	public void type(String text, int start, int end){
+		this.checkParametersSelection(start, end);
+		
 		this.text = this.text.delete(start, end);
 		this.text = this.text.insert(start, text);
 	}
