@@ -15,7 +15,7 @@ public class TestSelection {
 	
 	@Test
 	public void testGetStart() {
-		Assert.assertTrue("GetStart() - ", selection.getStart() == 0);
+		Assert.assertTrue("getStart() - ", selection.getStart() == 0);
 	}
 
 	@Test
@@ -26,7 +26,7 @@ public class TestSelection {
 
 	@Test
 	public void testGetLength() {
-		Assert.assertTrue("GetLength() - ", selection.getLength() == 0);
+		Assert.assertTrue("getLength() - ", selection.getLength() == 0);
 	}
 
 	@Test

@@ -9,11 +9,11 @@ package receiver;
 public interface EditorEngine {
 	public void copy();
 	
-	public void paste();
+	public void paste() throws NumberFormatException;
 	
-	public void cut();
+	public void cut() throws NumberFormatException;
 	
-	public void erase();
+	public void erase() throws NumberFormatException;
 	
-	public void type();	
+	public void type() throws NumberFormatException;	
 }
