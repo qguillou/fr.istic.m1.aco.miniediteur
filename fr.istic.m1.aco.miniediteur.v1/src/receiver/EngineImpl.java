@@ -2,14 +2,22 @@ package receiver;
 
 
 /**
- * 
+ * EngineImpl
+ * Execute commands on buffer, clipboard and selection
  * @author Yann Jegu & Quentin Guillou
+ * @version 1.0
  */
 public class EngineImpl implements EditorEngine {
 	private Selection selection;	
 	private ClipBoard clipboard;	
 	private Buffer buffer;
 	
+	/**
+	 * EngineImpl() - Constructor
+	 * @param selection: the Selection object
+	 * @param clipboard: the Clipoard of application
+	 * @param buffer: the Buffer of application
+	 */
 	public EngineImpl(Selection selection, ClipBoard clipboard, Buffer buffer){
 		this.selection = selection;
 		this.clipboard = clipboard;
@@ -17,6 +25,10 @@ public class EngineImpl implements EditorEngine {
 	}
 	
 	@Override
+	/**
+	 * copy()
+	 * copy text into clipboard
+	 */
 	public void copy() {
 		int start = selection.getStart();
 		int end = start + selection.getLength();
@@ -26,6 +38,10 @@ public class EngineImpl implements EditorEngine {
 	}
 
 	@Override
+	/**
+	 * paste()
+	 * paste text into buffer
+	 */
 	public void paste() {
 		String text = clipboard.getText();
 		int start = selection.getStart();
@@ -37,6 +53,10 @@ public class EngineImpl implements EditorEngine {
 	}
 
 	@Override
+	/**
+	 * cut()
+	 * cut text into buffer and put text into clipboard
+	 */
 	public void cut() {
 		int start = selection.getStart();
 		int end = start + selection.getLength();
@@ -47,6 +67,10 @@ public class EngineImpl implements EditorEngine {
 	}
 
 	@Override
+	/**
+	 * erase()
+	 * erase text into buffer
+	 */
 	public void erase() {
 		int start = selection.getStart();
 		int end = start + selection.getLength();
@@ -60,6 +84,10 @@ public class EngineImpl implements EditorEngine {
 	}
 
 	@Override
+	/**
+	 * type()
+	 * type text into buffer
+	 */
 	public void type() {
 		//TO DO.....................................................................
 		String text = ""; //Récupération de la saisie clavier du texte

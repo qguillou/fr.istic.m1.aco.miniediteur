@@ -1,7 +1,9 @@
 package receiver;
 
 /**
- * @(#) EditorEngine.java
+ * EditorEngine - Interface
+ * @author Yann Jegu & Quentin Guillou
+ * @version 1.0
  */
 
 public interface EditorEngine {
