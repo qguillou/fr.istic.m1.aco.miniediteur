@@ -97,5 +97,27 @@ public class EngineImpl implements EditorEngine {
 		buffer.type(text, start, end);
 		selection.setStart(start + text.length());
 		selection.setLength(0);
+	}
+	
+	@Override
+	/**
+	 * setSelection()
+	 * set the selection start end length
+	 * @param start: the start of new selection
+	 * @param length: the length of new selection
+	 */
+	public void setSelection(int start, int length) throws NumberFormatException {
+		selection.setStart(start);
+		selection.setLength(length);
+	}
+
+	@Override
+	/**
+	 * getText()
+	 * get the text of buffer
+	 * @return String text: the content of buffer
+	 */
+	public String getText() {
+		return buffer.getText();
 	}	
 }

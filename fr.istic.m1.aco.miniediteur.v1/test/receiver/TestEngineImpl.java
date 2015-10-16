@@ -99,5 +99,18 @@ public class TestEngineImpl {
 		Assert.assertTrue("Type() with selected text - Type hasn't updated Selection variables", selection.getLength() == 0 && selection.getStart() == 1);
 		Assert.assertTrue("Type() with selected text - Text doesn't been updated in Buffer", buffer.getText().equals("v"));
 	}
-
+	
+	@Test (expected=NumberFormatException.class)
+	public void testSetSelection() {
+		engine.setSelection(1, 1);
+		Assert.assertTrue("SetSelection() - SetSelection hasn't updated Selection variables", selection.getLength() == 1 && selection.getStart() == 1);
+		
+		engine.setSelection(-1, 0);
+	}
+	
+	@Test
+	public void testGetText(){
+		buffer.setText("value");		
+		Assert.assertTrue("GetText() - Return isn't the content of buffer", buffer.getText().equals("value"));
+	}
 }
