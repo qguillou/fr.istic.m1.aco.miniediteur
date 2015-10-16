@@ -74,13 +74,14 @@ public class EngineImpl implements EditorEngine {
 	public void erase() {
 		int start = selection.getStart();
 		int end = start + selection.getLength();
-		
 		if(start == end)
 			start--;
 		
-		buffer.erase(start, end);
-		selection.setLength(0);
-		selection.setStart(start);
+		if(start >= 0){
+			buffer.erase(start, end);
+			selection.setLength(0);
+			selection.setStart(start);
+		}
 	}
 
 	@Override
