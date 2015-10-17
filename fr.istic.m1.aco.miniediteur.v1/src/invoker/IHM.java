@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Font;
 
 import javax.swing.JFrame;
-import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -72,6 +71,6 @@ public class IHM extends JFrame {
 	}
 	
 	public static void main(String[] args) {
-		IHM ihm = new IHM();
+		new IHM();
 	}
 }
