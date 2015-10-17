@@ -14,6 +14,11 @@ public class TestClipBoard {
 	}
 	
 	@Test
+	public void testClipBoard() {
+		Assert.assertTrue("ClipBoard() - Parameters aren't initialized", clipboard.getText().equals(""));
+	}
+	
+	@Test
 	public void testGetText() {
 		Assert.assertTrue("GetText() - text doesn't void at start", clipboard.getText().equals(""));
 	}

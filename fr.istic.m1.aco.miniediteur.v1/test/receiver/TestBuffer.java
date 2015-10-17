@@ -14,6 +14,11 @@ public class TestBuffer {
 	}
 	
 	@Test
+	public void testBuffer() {
+		Assert.assertTrue("Buffer() - Parameters aren't initialized", buffer.getText().equals(""));
+	}
+	
+	@Test
 	public void testGetText() {
 		Assert.assertTrue("GetText() - Text no void at start", buffer.getText().equals(""));
 		

@@ -14,6 +14,11 @@ public class TestSelection {
 	}
 	
 	@Test
+	public void testSelection() {
+		Assert.assertTrue("Selection() - Parameters aren't initialized", selection.getStart() == 0 && selection.getLength() == 0);
+	}
+	
+	@Test
 	public void testGetStart() {
 		Assert.assertTrue("getStart() - ", selection.getStart() == 0);
 	}
