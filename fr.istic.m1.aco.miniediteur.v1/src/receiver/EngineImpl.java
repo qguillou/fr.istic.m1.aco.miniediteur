@@ -1,5 +1,7 @@
 package receiver;
 
+import command.Command;
+
 
 /**
  * EngineImpl
@@ -11,6 +13,13 @@ public class EngineImpl implements EditorEngine {
 	private Selection selection;	
 	private ClipBoard clipboard;	
 	private Buffer buffer;
+	
+	private Command copy;
+	private Command cut;
+	private Command erase;
+	private Command paste;
+	private Command select;
+	private Command type;
 	
 	/**
 	 * EngineImpl() - Constructor
@@ -29,12 +38,14 @@ public class EngineImpl implements EditorEngine {
 	 * copy()
 	 * copy text into clipboard
 	 */
-	public void copy() {
+	public String copy() {
 		int start = selection.getStart();
 		int end = start + selection.getLength();
 		
 		String text = buffer.copy(start, end);
 		clipboard.setText(text);
+		
+		return getText();
 	}
 
 	@Override
@@ -42,7 +53,7 @@ public class EngineImpl implements EditorEngine {
 	 * paste()
 	 * paste text into buffer
 	 */
-	public void paste() {
+	public String paste() {
 		String text = clipboard.getText();
 		int start = selection.getStart();
 		int end = start + selection.getLength();
@@ -50,6 +61,8 @@ public class EngineImpl implements EditorEngine {
 		buffer.paste(text, start, end);
 		selection.setLength(0);
 		selection.setStart(start + text.length());
+		
+		return getText();
 	}
 
 	@Override
@@ -57,13 +70,15 @@ public class EngineImpl implements EditorEngine {
 	 * cut()
 	 * cut text into buffer and put text into clipboard
 	 */
-	public void cut() {
+	public String cut() {
 		int start = selection.getStart();
 		int end = start + selection.getLength();
 		
 		String text = buffer.cut(start, end);
 		selection.setLength(0);
 		clipboard.setText(text);
+		
+		return getText();
 	}
 
 	@Override
@@ -71,7 +86,7 @@ public class EngineImpl implements EditorEngine {
 	 * erase()
 	 * erase text into buffer
 	 */
-	public void erase() {
+	public String erase() {
 		int start = selection.getStart();
 		int end = start + selection.getLength();
 		if(start == end)
@@ -82,6 +97,8 @@ public class EngineImpl implements EditorEngine {
 			selection.setLength(0);
 			selection.setStart(start);
 		}
+		
+		return getText();
 	}
 
 	@Override
@@ -89,15 +106,16 @@ public class EngineImpl implements EditorEngine {
 	 * type()
 	 * type text into buffer
 	 */
-	public void type() {
-		//TO DO.....................................................................
-		String text = ""; //Récupération de la saisie clavier du texte
+	public String type() {
+		String text = type.getText();
 		int start = selection.getStart();
 		int end = start + selection.getLength();
 		
 		buffer.type(text, start, end);
 		selection.setStart(start + text.length());
 		selection.setLength(0);
+		
+		return getText();
 	}
 	
 	@Override
@@ -107,9 +125,8 @@ public class EngineImpl implements EditorEngine {
 	 * @param start: the start of new selection
 	 * @param length: the length of new selection
 	 */
-	public void setSelection(int start, int length) throws NumberFormatException {
-		selection.setStart(start);
-		selection.setLength(length);
+	public String select() throws NumberFormatException {
+		return getText();
 	}
 
 	@Override
@@ -120,5 +137,23 @@ public class EngineImpl implements EditorEngine {
 	 */
 	public String getText() {
 		return buffer.getText();
-	}	
+	}
+	
+	/**
+	 * 
+	 * @param copy
+	 * @param cut
+	 * @param erase
+	 * @param paste
+	 * @param select
+	 * @param type
+	 */
+	public void setCommand(Command copy, Command cut, Command erase, Command paste, Command select, Command type) {
+		this.copy = copy;
+		this.cut = cut;
+		this.erase = erase;
+		this.paste = paste;
+		this.select = select;
+		this.type = type;
+	}
 }

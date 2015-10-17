@@ -21,5 +21,10 @@ public class Paste implements Command {
 	public void execute() {
 		engine.paste();
 	}
+	
+	@Override
+	public String getText() {
+		return "";
+	}
 
 }

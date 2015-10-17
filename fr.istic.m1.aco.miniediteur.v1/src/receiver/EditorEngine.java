@@ -1,5 +1,7 @@
 package receiver;
 
+import command.Command;
+
 /**
  * EditorEngine - Interface
  * @author Yann Jegu & Quentin Guillou
@@ -7,17 +9,19 @@ package receiver;
  */
 
 public interface EditorEngine {
-	public void copy();
+	public String copy();
 	
-	public void paste() throws NumberFormatException;
+	public String paste() throws NumberFormatException;
 	
-	public void cut() throws NumberFormatException;
+	public String cut() throws NumberFormatException;
 	
-	public void erase() throws NumberFormatException;
+	public String erase() throws NumberFormatException;
 	
-	public void type() throws NumberFormatException;
+	public String type() throws NumberFormatException;
 	
-	public void setSelection(int start, int length) throws NumberFormatException;
+	public String select() throws NumberFormatException;
 	
 	public String getText() throws NumberFormatException;
+
+	public void setCommand(Command copy, Command cut, Command erase, Command paste, Command select, Command type);
 }

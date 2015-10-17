@@ -22,4 +22,9 @@ public class Copy implements Command {
 		engine.copy();
 	}
 
+	@Override
+	public String getText() {
+		return "";
+	}
+
 }

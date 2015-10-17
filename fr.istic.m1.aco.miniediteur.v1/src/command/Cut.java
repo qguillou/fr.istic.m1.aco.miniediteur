@@ -21,5 +21,10 @@ public class Cut implements Command {
 	public void execute() {
 		engine.cut();
 	}
+	
+	@Override
+	public String getText() {
+		return "";
+	}
 
 }

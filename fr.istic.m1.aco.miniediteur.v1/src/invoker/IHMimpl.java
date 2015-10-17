@@ -1,32 +1,28 @@
 package invoker;
 
 import java.awt.BorderLayout;
-import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenuBar;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 
+
+@SuppressWarnings("serial")
 public class IHMimpl extends JFrame implements IHM {
-
-	private static final long serialVersionUID = 1L;
 	
-	private JTextArea area;
+	private TextArea area;
 	private JLabel action;
+	
+	private IHMListener listener;
 
 	public IHMimpl() {
 		super();
-		area =  new JTextArea();
+		area =  new TextArea();
+		area.create();
+		
 		action = new JLabel();
-	}
-	
-	public static void main(String[] args) {
-		IHM ihm = new IHMimpl();
-		ihm.createView();
 	}
 
 	@Override
@@ -36,6 +32,8 @@ public class IHMimpl extends JFrame implements IHM {
 		setMenu();
 		
 		setContent();
+		
+		setVisible(true);
 	}
 	
 	@Override
@@ -49,7 +47,6 @@ public class IHMimpl extends JFrame implements IHM {
 	    setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setSize(800, 500);
 		setLocationRelativeTo(null);
-		setVisible(true);
 	}
 
 	@Override
@@ -60,11 +57,7 @@ public class IHMimpl extends JFrame implements IHM {
 
 	@Override
 	public void setContent() {
-		area.setFont(new Font("Monospaced",Font.PLAIN,12));
-		area.setLineWrap(true);
-		JScrollPane scroll = new JScrollPane(area,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		add(scroll, BorderLayout.CENTER);
-		
+		add(area.getScrollArea(), BorderLayout.CENTER);
 		getContentPane().add(action, BorderLayout.SOUTH);
 	}
 
@@ -76,5 +69,11 @@ public class IHMimpl extends JFrame implements IHM {
 	@Override
 	public void setCommandText(String text) {
 		action.setText(text);
+	}
+
+	@Override
+	public IHMListener createListener() {
+		listener = new IHMListener();
+		return listener;
 	}
 }

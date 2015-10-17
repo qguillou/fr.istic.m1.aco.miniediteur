@@ -100,12 +100,10 @@ public class TestEngineImpl {
 		Assert.assertTrue("Type() with selected text - Text doesn't been updated in Buffer", buffer.getText().equals("v"));
 	}
 	
-	@Test (expected=NumberFormatException.class)
-	public void testSetSelection() {
-		engine.setSelection(1, 1);
+	@Test
+	public void testSelect() {
+		engine.select();
 		Assert.assertTrue("SetSelection() - SetSelection hasn't updated Selection variables", selection.getLength() == 1 && selection.getStart() == 1);
-		
-		engine.setSelection(-1, 0);
 	}
 	
 	@Test

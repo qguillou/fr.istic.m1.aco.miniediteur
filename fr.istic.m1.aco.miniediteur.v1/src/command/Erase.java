@@ -21,4 +21,9 @@ public class Erase implements Command {
 	public void execute() {
 		engine.erase();
 	}
+	
+	@Override
+	public String getText() {
+		return "";
+	}
 }

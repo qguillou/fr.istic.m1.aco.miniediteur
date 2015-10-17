@@ -21,5 +21,9 @@ public class Type implements Command {
 	public void execute() {
 		engine.type();
 	}
+	
+	public String getText(){
+		return "";
+	}
 
 }
