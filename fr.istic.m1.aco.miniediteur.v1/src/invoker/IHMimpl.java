@@ -2,62 +2,79 @@ package invoker;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
+import java.awt.Image;
+import java.awt.Toolkit;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenuBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-import javax.swing.JToolBar;
 
 public class IHMimpl extends JFrame implements IHM {
 
 	private static final long serialVersionUID = 1L;
 	
-	private JTextArea area = new JTextArea(30,120);
+	private JTextArea area;
+	private JLabel action;
 
 	public IHMimpl() {
 		super();
-        
-        area.setFont(new Font("Monospaced",Font.PLAIN,12));
-		JScrollPane scroll = new JScrollPane(area,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		add(scroll, BorderLayout.CENTER);
-		
-		JMenuBar JMB = new JMenuBar();
-		setJMenuBar(JMB);
-
-		JToolBar tool = new JToolBar();
-		add(tool,BorderLayout.NORTH);
-
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		pack();
-		setVisible(true);
+		area =  new JTextArea();
+		action = new JLabel();
 	}
 	
 	public static void main(String[] args) {
-		new IHMimpl();
+		IHM ihm = new IHMimpl();
+		ihm.createView();
 	}
 
 	@Override
 	public void createView() {
-		// TODO Auto-generated method stub
+		setFrameOptions();
+	    
+		setMenu();
 		
+		setContent();
+	}
+	
+	@Override
+	public void setFrameOptions() {
+		setTitle("Editext");
+		
+		Toolkit kit = Toolkit.getDefaultToolkit();
+		Image img = kit.getImage("image/texte.png");
+	    setIconImage(img);
+	    
+	    setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setSize(800, 500);
+		setLocationRelativeTo(null);
+		setVisible(true);
 	}
 
 	@Override
 	public void setMenu() {
-		// TODO Auto-generated method stub
-		
+		JMenuBar menu = new JMenuBar();
+		setJMenuBar(menu);
 	}
 
 	@Override
 	public void setContent() {
-		// TODO Auto-generated method stub
+		area.setFont(new Font("Monospaced",Font.PLAIN,12));
+		area.setLineWrap(true);
+		JScrollPane scroll = new JScrollPane(area,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		add(scroll, BorderLayout.CENTER);
 		
+		getContentPane().add(action, BorderLayout.SOUTH);
 	}
 
 	@Override
 	public void getText() {
-		// TODO Auto-generated method stub
-		
+		area.getText();
+	}
+	
+	@Override
+	public void setCommandText(String text) {
+		action.setText(text);
 	}
 }
