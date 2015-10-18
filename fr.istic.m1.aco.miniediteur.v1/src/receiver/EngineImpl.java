@@ -127,7 +127,9 @@ public class EngineImpl implements EditorEngine {
 	public String select() throws NumberFormatException {
 		int start = select.getSelectionStart();
 		int length = select.getSelectionEnd() - start;
-				
+		
+		System.out.println("start "+start+"length "+length);
+		
 		selection.setStart(start);
 		selection.setLength(length);
 

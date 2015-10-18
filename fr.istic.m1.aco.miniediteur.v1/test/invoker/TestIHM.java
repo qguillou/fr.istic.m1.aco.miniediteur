@@ -1,4 +1,4 @@
-package fr.istic.m1.aco.miniediteur.v1;
+package invoker;
 
 
 import java.awt.AWTException;
