@@ -42,7 +42,7 @@ public class Buffer {
 	 * @param end: the end index of cut text
 	 * @return String: the text to cut
 	 */
-	public String cut(int start, int end){		
+	public String cut(int start, int end){
 		String select_text = this.text.substring(start, end);
 		this.text = this.text.delete(start, end);
 		return select_text;

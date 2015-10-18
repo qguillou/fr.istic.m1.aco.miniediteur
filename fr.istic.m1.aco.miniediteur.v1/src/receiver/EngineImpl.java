@@ -73,7 +73,6 @@ public class EngineImpl implements EditorEngine {
 	public String cut() {
 		int start = selection.getStart();
 		int end = start + selection.getLength();
-		
 		String text = buffer.cut(start, end);
 		selection.setLength(0);
 		clipboard.setText(text);
