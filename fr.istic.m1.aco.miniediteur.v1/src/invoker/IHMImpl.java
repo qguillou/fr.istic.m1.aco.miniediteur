@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -16,6 +17,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JToolBar;
 import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
+import javax.swing.border.Border;
 
 
 @SuppressWarnings("serial")
@@ -35,7 +37,7 @@ public class IHMImpl extends JFrame implements IHM {
 		area.addCaretListener(listener);
 		area.addKeyListener(listener);
 		
-		action = new JLabel();
+		action = new JLabel(" ");
 	}
 
 	@Override
@@ -105,7 +107,7 @@ public class IHMImpl extends JFrame implements IHM {
 		item.addActionListener(listener);
 		menu_edit.add(item);
 		menu_edit.addSeparator();
-		item = new JMenuItem("Back space");
+		item = new JMenuItem("Erase");
 		ctrlXKeyStroke = KeyStroke.getKeyStroke("BACK_SPACE");
 	    item.setAccelerator(ctrlXKeyStroke);
 		item.setBackground(Color.WHITE);
@@ -116,7 +118,10 @@ public class IHMImpl extends JFrame implements IHM {
 		menu.add(menu_edit);
 		
 		JMenu menu_about = new JMenu("About");
-		menu_about.setBackground(Color.WHITE);
+		item = new JMenuItem("About");
+		item.addActionListener(listener);
+		item.setBackground(Color.WHITE);
+		menu_about.add(item);
 		menu.add(menu_about);
 	}
 	
@@ -170,6 +175,9 @@ public class IHMImpl extends JFrame implements IHM {
 	@Override
 	public void setContent() {
 		add(area.getScrollArea(), BorderLayout.CENTER);
+		
+		Border paddingBorder = BorderFactory.createEmptyBorder(10,10,10,10);
+		action.setBorder(BorderFactory.createCompoundBorder(null,paddingBorder));
 		getContentPane().add(action, BorderLayout.SOUTH);
 	}
 

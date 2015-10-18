@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
+import javax.swing.JOptionPane;
 import javax.swing.event.*;
 
 import command.Command;
@@ -100,6 +101,13 @@ public class IHMListener implements CaretListener, KeyListener, ActionListener {
 			break;
 		case "Erase":
 			erase.execute();
+			break;
+		case "About":
+			System.out.println("ok");
+			JOptionPane.showMessageDialog(JOptionPane.getRootFrame(),
+				    "ACO Project\nDeveloped by Yann JEGU & Quentin GUILLOU\nVersion 1.0 October, 2015",
+				    "About Editext",
+				    JOptionPane.PLAIN_MESSAGE);
 			break;
 		}
 	}
