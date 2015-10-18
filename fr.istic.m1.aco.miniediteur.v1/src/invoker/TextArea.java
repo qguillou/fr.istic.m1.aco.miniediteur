@@ -31,6 +31,7 @@ public class TextArea extends JTextArea implements Observer {
 		setText(text);
 		setSelectionStart(start);
 		setSelectionEnd(end);
+		getCaret().setVisible(true);
 		requestFocusInWindow();
 	}
 

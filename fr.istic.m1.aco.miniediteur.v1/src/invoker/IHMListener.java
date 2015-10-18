@@ -65,6 +65,9 @@ public class IHMListener implements MouseListener, KeyListener, ActionListener {
 			case KeyEvent.VK_X:
 				cut.execute();
 				break;
+			case KeyEvent.VK_A:
+				select.execute();
+				break;
             }
         }
 		else {
@@ -86,7 +89,19 @@ public class IHMListener implements MouseListener, KeyListener, ActionListener {
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		
+		if ((e.getModifiers() & KeyEvent.CTRL_MASK) != 0) {
+			
+        }
+		else {
+			switch(e.getKeyCode()) {
+			case KeyEvent.VK_LEFT:
+			case KeyEvent.VK_RIGHT:
+			case KeyEvent.VK_UP:
+			case KeyEvent.VK_DOWN:
+				select.execute();
+				break;				
+			}
+		}
 	}
 
 	@Override
@@ -138,6 +153,5 @@ public class IHMListener implements MouseListener, KeyListener, ActionListener {
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
 		select.execute();
-		ihm.getTextArea().getCaret().setVisible(true);
 	}
 }
