@@ -1,5 +1,9 @@
 package command;
 
+import invoker.IHM;
+import invoker.IHMListener;
+import invoker.IHMImpl;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,14 +21,16 @@ public class TestType {
 	ClipBoard clipboard;
 	Buffer buffer;
 	Selection selection;
+	IHM ihm;
 	
 	@Before
 	public void initialize() {
+		ihm = new IHMImpl(new IHMListener());
 		clipboard = new ClipBoard();
 		buffer = new Buffer();
 		selection = new Selection();
 		engine = new EngineImpl(selection, clipboard, buffer);
-		command = new Type(engine);
+		command = new Type(engine, ihm);
 	}
 	
 	@Test

@@ -1,6 +1,5 @@
 package invoker;
 
-
 public interface IHM {
 	
 	public void createView();
@@ -9,11 +8,13 @@ public interface IHM {
 	
 	public void setMenu();
 	
+	public void setToolbar();
+	
 	public void setContent();
 	
-	public void getText();
-		
-	public void setCommandText(String text);
+	public TextArea getTextArea();
 	
-	public IHMListener createListener();
+	public IHMListener getListener();
+	
+	public void setCommandText(String text);
 }

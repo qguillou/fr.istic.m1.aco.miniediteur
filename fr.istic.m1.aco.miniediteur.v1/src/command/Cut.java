@@ -1,17 +1,20 @@
 package command;
 
+import invoker.IHM;
 import receiver.EditorEngine;
 
 public class Cut implements Command {
 	
+	private IHM ihm;
 	private EditorEngine engine;
 	
 	/**
 	 * Construct the Command Cut
 	 * @param engine the engine which will receive the command
 	 */
-	public Cut(EditorEngine engine) {
+	public Cut(EditorEngine engine, IHM ihm) {
 		this.engine = engine;
+		this.ihm = ihm;
 	}
 	
 	/**
@@ -19,12 +22,28 @@ public class Cut implements Command {
 	 */
 	@Override
 	public void execute() {
-		engine.cut();
+		ihm.setCommandText("Ctrl + X");
+		String text = engine.cut();
+		setText(text);
 	}
 	
 	@Override
 	public String getText() {
 		return "";
 	}
+	
+	@Override
+	public void setText(String text) {
+		ihm.getTextArea().setText(text);
+	}
+	
+	@Override
+	public int getSelectionStart(){
+		return ihm.getTextArea().getSelectionStart();
+	}
 
+	@Override
+	public int getSelectionEnd() {
+		return ihm.getTextArea().getSelectionEnd();
+	}
 }

@@ -120,12 +120,18 @@ public class EngineImpl implements EditorEngine {
 	
 	@Override
 	/**
-	 * setSelection()
+	 * select()
 	 * set the selection start end length
 	 * @param start: the start of new selection
 	 * @param length: the length of new selection
 	 */
 	public String select() throws NumberFormatException {
+		int start = select.getSelectionStart();
+		int length = select.getSelectionEnd() - start;
+				
+		selection.setStart(start);
+		selection.setLength(length);
+
 		return getText();
 	}
 
