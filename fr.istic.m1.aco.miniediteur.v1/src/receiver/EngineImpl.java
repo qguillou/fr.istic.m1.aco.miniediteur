@@ -134,7 +134,6 @@ public class EngineImpl extends Subject implements EditorEngine  {
 	public void select() throws NumberFormatException {
 		int start = select.getSelectionStart();
 		int length = select.getSelectionEnd() - start;
-		
 		selection.setStart(start);
 		selection.setLength(length);
 		

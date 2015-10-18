@@ -22,6 +22,7 @@ public class Type implements Command {
 	 */
 	@Override
 	public void execute() {
+		ihm.setCommandText(" ");
 		engine.type();
 	}
 	

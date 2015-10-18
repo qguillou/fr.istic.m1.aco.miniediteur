@@ -66,6 +66,8 @@ public class IHMListener implements MouseListener, KeyListener, ActionListener {
 				cut.execute();
 				break;
 			case KeyEvent.VK_A:
+				ihm.getTextArea().setSelectionStart(0);
+				ihm.getTextArea().setSelectionEnd(ihm.getTextArea().getText().length());
 				select.execute();
 				break;
             }
@@ -98,6 +100,10 @@ public class IHMListener implements MouseListener, KeyListener, ActionListener {
 			case KeyEvent.VK_RIGHT:
 			case KeyEvent.VK_UP:
 			case KeyEvent.VK_DOWN:
+			case KeyEvent.VK_PAGE_UP:
+			case KeyEvent.VK_PAGE_DOWN:
+			case KeyEvent.VK_END:
+			case KeyEvent.VK_HOME:
 				select.execute();
 				break;				
 			}
@@ -125,7 +131,6 @@ public class IHMListener implements MouseListener, KeyListener, ActionListener {
 			erase.execute();
 			break;
 		case "About":
-			System.out.println("ok");
 			JOptionPane.showMessageDialog(JOptionPane.getRootFrame(),
 				    "ACO Project\nDeveloped by Yann JEGU & Quentin GUILLOU\nVersion 1.0 October, 2015",
 				    "About Editext",
