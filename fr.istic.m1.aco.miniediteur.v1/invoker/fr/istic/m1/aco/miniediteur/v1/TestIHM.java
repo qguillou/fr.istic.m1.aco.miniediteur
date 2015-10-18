@@ -3,6 +3,7 @@ package fr.istic.m1.aco.miniediteur.v1;
 
 import java.awt.AWTException;
 import java.awt.Robot;
+import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 
 import invoker.IHMImpl;
@@ -62,6 +63,7 @@ public class TestIHM {
 		selection.setLength(0);
 		selection.setStart(0);
 		clipboard.setText("");
+		ihm.getTextArea().requestFocus();
 	}
 	
 	@Test
@@ -76,7 +78,12 @@ public class TestIHM {
 	}
 	
 	@Test
-	public void testCut() throws InterruptedException, AWTException {
+	public void testSelect(){
+		
+	}
+	
+	@Test
+	public void testCutKeyboard() throws InterruptedException, AWTException {
 		Assert.assertTrue("Cut() - Clipbord doesn't empty", clipboard.getText().equals(""));
 		Assert.assertTrue("Cut() - Selection.length not equals 0", selection.getLength() == 0);
 		Assert.assertTrue("Cut() - Selection.start not equals 0", selection.getStart() == 0);
@@ -101,7 +108,7 @@ public class TestIHM {
 	}
 	
 	@Test
-	public void testCopy() throws InterruptedException, AWTException{
+	public void testCopyKeyboard() throws InterruptedException, AWTException{
 		Assert.assertTrue("Copy() - Clipbord doesn't empty", clipboard.getText().equals(""));
 		Assert.assertTrue("Copy() - Selection.length not equals 0", selection.getLength() == 0);
 		Assert.assertTrue("Copy() - Selection.start not equals 0", selection.getStart() == 0);
@@ -126,7 +133,7 @@ public class TestIHM {
 	}
 	
 	@Test
-	public void testPaste() throws InterruptedException, AWTException{
+	public void testPasteKeyboard() throws InterruptedException, AWTException{
 		Assert.assertTrue("Paste() - Clipbord doesn't empty", clipboard.getText().equals(""));
 		Assert.assertTrue("Paste() - Selection.length not equals 0", selection.getLength() == 0);
 		Assert.assertTrue("Paste() - Selection.start not equals 0", selection.getStart() == 0);
@@ -162,7 +169,330 @@ public class TestIHM {
 	}
 	
 	@Test
-	public void testErase(){
+	public void testEraseKeyboard() throws InterruptedException, AWTException{
+		Assert.assertTrue("Erase() - Clipbord doesn't empty", clipboard.getText().equals(""));
+		Assert.assertTrue("Erase() - Selection.length not equals 0", selection.getLength() == 0);
+		Assert.assertTrue("Erase() - Selection.start not equals 0", selection.getStart() == 0);
 		
+		buffer.setText("ab");
+		selection.setStart(0);
+		selection.setLength(0);
+		Thread.sleep(100);
+		Robot robot = new Robot();
+		robot.keyPress(KeyEvent.VK_BACK_SPACE);
+		Thread.sleep(100);
+		Assert.assertTrue("Erase() - Text erase but no text to erase before curosr position", buffer.getText().equals("ab"));
+		Assert.assertTrue("Erase() - Selection parameters doesn't updated", selection.getStart() == 0 && selection.getLength() == 0);
+		
+		selection.setStart(2);
+		selection.setLength(0);
+		Thread.sleep(100);
+		robot.keyPress(KeyEvent.VK_BACK_SPACE);
+		Thread.sleep(100);
+		Assert.assertTrue("Erase() - Text don't erase", buffer.getText().equals("a"));
+		Assert.assertTrue("Erase() - Selection parameters doesn't updated", selection.getStart() == 1 && selection.getLength() == 0);
+	
+		buffer.setText("abc");
+		selection.setStart(1);
+		selection.setLength(2);
+		Thread.sleep(100);
+		robot.keyPress(KeyEvent.VK_BACK_SPACE);
+		Thread.sleep(100);
+		Assert.assertTrue("Erase() - Text erase but no text to erase before curosr position", buffer.getText().equals("a"));
+		Assert.assertTrue("Erase() - Selection parameters doesn't updated", selection.getStart() == 1 && selection.getLength() == 0);
+	}
+	
+	@Test
+	public void testCopyButton() throws AWTException, InterruptedException {
+		Assert.assertTrue("Copy() - Clipbord doesn't empty", clipboard.getText().equals(""));
+		Assert.assertTrue("Copy() - Selection.length not equals 0", selection.getLength() == 0);
+		Assert.assertTrue("Copy() - Selection.start not equals 0", selection.getStart() == 0);
+		Robot robot = new Robot();
+		buffer.setText("abc");
+		selection.setStart(0);
+		selection.setLength(0);
+		Thread.sleep(100);		
+		robot.mouseMove(ihm.getX()+125, ihm.getY()+80);
+		robot.mousePress(InputEvent.BUTTON1_MASK);
+		robot.mouseRelease(InputEvent.BUTTON1_MASK);
+		Thread.sleep(100);
+		Assert.assertTrue("Copy() - Text copy but no text selected", clipboard.getText().equals(""));
+		
+		selection.setStart(1);
+		selection.setLength(2);
+		Thread.sleep(100);		
+		robot.mouseMove(ihm.getX()+125, ihm.getY()+80);
+		robot.mousePress(InputEvent.BUTTON1_MASK);
+		robot.mouseRelease(InputEvent.BUTTON1_MASK);
+		Thread.sleep(100);
+		Assert.assertTrue("Copy() - No text copied but text selected or the text copied doesn't the select text", clipboard.getText().equals("bc"));
+		Assert.assertTrue("Copy() - Select text put into clipboard but doesn't copied into buffer", buffer.getText().equals("abc"));
+		Assert.assertTrue("Copy() - Parameters of selection doesn't updated", selection.getStart() == 1 && selection.getLength() == 2);
+	}
+	
+	@Test
+	public void testCutButton() throws AWTException, InterruptedException {
+		Assert.assertTrue("Cut() - Clipbord doesn't empty", clipboard.getText().equals(""));
+		Assert.assertTrue("Cut() - Selection.length not equals 0", selection.getLength() == 0);
+		Assert.assertTrue("Cut() - Selection.start not equals 0", selection.getStart() == 0);
+		Robot robot = new Robot();
+		buffer.setText("ab");
+		selection.setStart(0);
+		selection.setLength(0);
+		Thread.sleep(100);		
+		robot.mouseMove(ihm.getX()+60, ihm.getY()+80);
+		robot.mousePress(InputEvent.BUTTON1_MASK);
+		robot.mouseRelease(InputEvent.BUTTON1_MASK);
+		Thread.sleep(100);
+		Assert.assertTrue("Cut() - Text cut but no text selected", clipboard.getText().equals(""));
+		
+		selection.setStart(1);
+		selection.setLength(1);
+		Thread.sleep(100);		
+		robot.mouseMove(ihm.getX()+60, ihm.getY()+80);
+		robot.mousePress(InputEvent.BUTTON1_MASK);
+		robot.mouseRelease(InputEvent.BUTTON1_MASK);
+		Thread.sleep(100);
+		Assert.assertTrue("Cut() - No text cut but text selected or the text cut doesn't the select text", clipboard.getText().equals("b"));
+		Assert.assertTrue("Cut() - Select text put into clipboard but doesn't cut into buffer", buffer.getText().equals("a"));
+		Assert.assertTrue("Cut() - Parameters of selection doesn't updated", selection.getStart() == 1 && selection.getLength() == 0);
+	}
+	
+	@Test
+	public void testPasteButton() throws InterruptedException, AWTException {
+		Assert.assertTrue("Paste() - Clipbord doesn't empty", clipboard.getText().equals(""));
+		Assert.assertTrue("Paste() - Selection.length not equals 0", selection.getLength() == 0);
+		Assert.assertTrue("Paste() - Selection.start not equals 0", selection.getStart() == 0);
+		buffer.setText("ab");
+		Thread.sleep(100);
+		Robot robot = new Robot();
+		robot.mouseMove(ihm.getX()+170, ihm.getY()+80);
+		robot.mousePress(InputEvent.BUTTON1_MASK);
+		robot.mouseRelease(InputEvent.BUTTON1_MASK);
+		Thread.sleep(100);
+		Assert.assertTrue("Paste() - Text paste but no text in clipboard", buffer.getText().equals("ab"));
+		Assert.assertTrue("Paste() - Selection parameters doesn't updated", selection.getStart() == 2 && selection.getLength() == 0);
+		
+		clipboard.setText("d");
+		selection.setStart(2);
+		selection.setLength(0);
+		robot.mouseMove(ihm.getX()+170, ihm.getY()+80);
+		robot.mousePress(InputEvent.BUTTON1_MASK);
+		robot.mouseRelease(InputEvent.BUTTON1_MASK);
+		Thread.sleep(100);
+		Assert.assertTrue("Paste() - Text paste but no text in clipboard", buffer.getText().equals("abd"));
+		Assert.assertTrue("Paste() - Selection parameters doesn't updated", selection.getStart() == 3 && selection.getLength() == 0);
+		
+		clipboard.setText("c");
+		selection.setStart(2);
+		selection.setLength(1);
+		robot.mouseMove(ihm.getX()+170, ihm.getY()+80);
+		robot.mousePress(InputEvent.BUTTON1_MASK);
+		robot.mouseRelease(InputEvent.BUTTON1_MASK);
+		Thread.sleep(100);
+		Assert.assertTrue("Paste() - Text paste but no text in clipboard", buffer.getText().equals("abc"));
+		Assert.assertTrue("Paste() - Selection parameters doesn't updated", selection.getStart() == 3 && selection.getLength() == 0);
+	}
+	
+	@Test
+	public void testEraseButton() throws InterruptedException, AWTException {
+		Assert.assertTrue("Erase() - Clipbord doesn't empty", clipboard.getText().equals(""));
+		Assert.assertTrue("Erase() - Selection.length not equals 0", selection.getLength() == 0);
+		Assert.assertTrue("Erase() - Selection.start not equals 0", selection.getStart() == 0);
+		
+		buffer.setText("ab");
+		selection.setStart(0);
+		selection.setLength(0);
+		Thread.sleep(100);
+		Robot robot = new Robot();
+		robot.mouseMove(ihm.getX()+260, ihm.getY()+80);
+		robot.mousePress(InputEvent.BUTTON1_MASK);
+		robot.mouseRelease(InputEvent.BUTTON1_MASK);
+		Thread.sleep(100);
+		Assert.assertTrue("Erase() - Text erase but no text to erase before curosr position", buffer.getText().equals("ab"));
+		Assert.assertTrue("Erase() - Selection parameters doesn't updated", selection.getStart() == 0 && selection.getLength() == 0);
+		
+		selection.setStart(2);
+		selection.setLength(0);
+		Thread.sleep(100);
+		robot.mouseMove(ihm.getX()+260, ihm.getY()+80);
+		robot.mousePress(InputEvent.BUTTON1_MASK);
+		robot.mouseRelease(InputEvent.BUTTON1_MASK);
+		Thread.sleep(100);
+		Assert.assertTrue("Erase() - Text don't erase", buffer.getText().equals("a"));
+		Assert.assertTrue("Erase() - Selection parameters doesn't updated", selection.getStart() == 1 && selection.getLength() == 0);
+	
+		buffer.setText("abc");
+		selection.setStart(1);
+		selection.setLength(2);
+		Thread.sleep(100);
+		robot.mouseMove(ihm.getX()+260, ihm.getY()+80);
+		robot.mousePress(InputEvent.BUTTON1_MASK);
+		robot.mouseRelease(InputEvent.BUTTON1_MASK);
+		Thread.sleep(100);
+		Assert.assertTrue("Erase() - Text erase but no text to erase before curosr position", buffer.getText().equals("a"));
+		Assert.assertTrue("Erase() - Selection parameters doesn't updated", selection.getStart() == 1 && selection.getLength() == 0);
+	}
+	
+	@Test
+	public void testCopyMenu() throws AWTException, InterruptedException {
+		Assert.assertTrue("Copy() - Clipbord doesn't empty", clipboard.getText().equals(""));
+		Assert.assertTrue("Copy() - Selection.length not equals 0", selection.getLength() == 0);
+		Assert.assertTrue("Copy() - Selection.start not equals 0", selection.getStart() == 0);
+		Robot robot = new Robot();
+		buffer.setText("abc");
+		selection.setStart(0);
+		selection.setLength(0);
+		Thread.sleep(100);		
+		robot.mouseMove(ihm.getX()+60, ihm.getY()+34);
+		robot.mousePress(InputEvent.BUTTON1_MASK);
+		robot.mouseRelease(InputEvent.BUTTON1_MASK);
+		robot.mouseMove(ihm.getX()+60, ihm.getY()+90);
+		robot.mousePress(InputEvent.BUTTON1_MASK);
+		robot.mouseRelease(InputEvent.BUTTON1_MASK);
+		Thread.sleep(100);
+		Assert.assertTrue("Copy() - Text copy but no text selected", clipboard.getText().equals(""));
+		
+		selection.setStart(1);
+		selection.setLength(2);
+		Thread.sleep(100);		
+		robot.mouseMove(ihm.getX()+60, ihm.getY()+34);
+		robot.mousePress(InputEvent.BUTTON1_MASK);
+		robot.mouseRelease(InputEvent.BUTTON1_MASK);
+		robot.mouseMove(ihm.getX()+60, ihm.getY()+90);
+		robot.mousePress(InputEvent.BUTTON1_MASK);
+		robot.mouseRelease(InputEvent.BUTTON1_MASK);
+		Thread.sleep(100);
+		Assert.assertTrue("Copy() - No text copied but text selected or the text copied doesn't the select text", clipboard.getText().equals("bc"));
+		Assert.assertTrue("Copy() - Select text put into clipboard but doesn't copied into buffer", buffer.getText().equals("abc"));
+		Assert.assertTrue("Copy() - Parameters of selection doesn't updated", selection.getStart() == 1 && selection.getLength() == 2);
+	}
+	
+	@Test
+	public void testCutMenu() throws AWTException, InterruptedException {
+		Assert.assertTrue("Cut() - Clipbord doesn't empty", clipboard.getText().equals(""));
+		Assert.assertTrue("Cut() - Selection.length not equals 0", selection.getLength() == 0);
+		Assert.assertTrue("Cut() - Selection.start not equals 0", selection.getStart() == 0);
+		Robot robot = new Robot();
+		buffer.setText("ab");
+		selection.setStart(0);
+		selection.setLength(0);
+		Thread.sleep(100);		
+		robot.mouseMove(ihm.getX()+60, ihm.getY()+34);
+		robot.mousePress(InputEvent.BUTTON1_MASK);
+		robot.mouseRelease(InputEvent.BUTTON1_MASK);
+		robot.mouseMove(ihm.getX()+60, ihm.getY()+70);
+		robot.mousePress(InputEvent.BUTTON1_MASK);
+		robot.mouseRelease(InputEvent.BUTTON1_MASK);
+		Thread.sleep(100);
+		Assert.assertTrue("Cut() - Text cut but no text selected", clipboard.getText().equals(""));
+		
+		selection.setStart(1);
+		selection.setLength(1);
+		Thread.sleep(100);		
+		robot.mouseMove(ihm.getX()+60, ihm.getY()+34);
+		robot.mousePress(InputEvent.BUTTON1_MASK);
+		robot.mouseRelease(InputEvent.BUTTON1_MASK);
+		robot.mouseMove(ihm.getX()+60, ihm.getY()+70);
+		robot.mousePress(InputEvent.BUTTON1_MASK);
+		robot.mouseRelease(InputEvent.BUTTON1_MASK);
+		Thread.sleep(100);
+		Assert.assertTrue("Cut() - No text cut but text selected or the text cut doesn't the select text", clipboard.getText().equals("b"));
+		Assert.assertTrue("Cut() - Select text put into clipboard but doesn't cut into buffer", buffer.getText().equals("a"));
+		Assert.assertTrue("Cut() - Parameters of selection doesn't updated", selection.getStart() == 1 && selection.getLength() == 0);
+	}
+	
+	@Test
+	public void testPasteMenu() throws AWTException, InterruptedException {
+		Assert.assertTrue("Paste() - Clipbord doesn't empty", clipboard.getText().equals(""));
+		Assert.assertTrue("Paste() - Selection.length not equals 0", selection.getLength() == 0);
+		Assert.assertTrue("Paste() - Selection.start not equals 0", selection.getStart() == 0);
+		buffer.setText("ab");
+		Thread.sleep(100);
+		Robot robot = new Robot();
+		robot.mouseMove(ihm.getX()+60, ihm.getY()+34);
+		robot.mousePress(InputEvent.BUTTON1_MASK);
+		robot.mouseRelease(InputEvent.BUTTON1_MASK);
+		robot.mouseMove(ihm.getX()+60, ihm.getY()+115);
+		robot.mousePress(InputEvent.BUTTON1_MASK);
+		robot.mouseRelease(InputEvent.BUTTON1_MASK);
+		Thread.sleep(100);
+		Assert.assertTrue("Paste() - Text paste but no text in clipboard", buffer.getText().equals("ab"));
+		Assert.assertTrue("Paste() - Selection parameters doesn't updated", selection.getStart() == 2 && selection.getLength() == 0);
+		
+		clipboard.setText("d");
+		selection.setStart(2);
+		selection.setLength(0);
+		robot.mouseMove(ihm.getX()+60, ihm.getY()+34);
+		robot.mousePress(InputEvent.BUTTON1_MASK);
+		robot.mouseRelease(InputEvent.BUTTON1_MASK);
+		robot.mouseMove(ihm.getX()+60, ihm.getY()+115);
+		robot.mousePress(InputEvent.BUTTON1_MASK);
+		robot.mouseRelease(InputEvent.BUTTON1_MASK);
+		Thread.sleep(100);
+		Assert.assertTrue("Paste() - Text paste but no text in clipboard", buffer.getText().equals("abd"));
+		Assert.assertTrue("Paste() - Selection parameters doesn't updated", selection.getStart() == 3 && selection.getLength() == 0);
+		
+		clipboard.setText("c");
+		selection.setStart(2);
+		selection.setLength(1);
+		robot.mouseMove(ihm.getX()+60, ihm.getY()+34);
+		robot.mousePress(InputEvent.BUTTON1_MASK);
+		robot.mouseRelease(InputEvent.BUTTON1_MASK);
+		robot.mouseMove(ihm.getX()+60, ihm.getY()+115);
+		robot.mousePress(InputEvent.BUTTON1_MASK);
+		robot.mouseRelease(InputEvent.BUTTON1_MASK);
+		Thread.sleep(100);
+		Assert.assertTrue("Paste() - Text paste but no text in clipboard", buffer.getText().equals("abc"));
+		Assert.assertTrue("Paste() - Selection parameters doesn't updated", selection.getStart() == 3 && selection.getLength() == 0);
+	}
+	
+	@Test
+	public void testEraseMenu() throws AWTException, InterruptedException{
+		Assert.assertTrue("Erase() - Clipbord doesn't empty", clipboard.getText().equals(""));
+		Assert.assertTrue("Erase() - Selection.length not equals 0", selection.getLength() == 0);
+		Assert.assertTrue("Erase() - Selection.start not equals 0", selection.getStart() == 0);
+		
+		buffer.setText("ab");
+		selection.setStart(0);
+		selection.setLength(0);
+		Thread.sleep(100);
+		Robot robot = new Robot();
+		robot.mouseMove(ihm.getX()+60, ihm.getY()+34);
+		robot.mousePress(InputEvent.BUTTON1_MASK);
+		robot.mouseRelease(InputEvent.BUTTON1_MASK);
+		robot.mouseMove(ihm.getX()+60, ihm.getY()+150);
+		robot.mousePress(InputEvent.BUTTON1_MASK);
+		robot.mouseRelease(InputEvent.BUTTON1_MASK);
+		Thread.sleep(100);
+		Assert.assertTrue("Erase() - Text erase but no text to erase before curosr position", buffer.getText().equals("ab"));
+		Assert.assertTrue("Erase() - Selection parameters doesn't updated", selection.getStart() == 0 && selection.getLength() == 0);
+		
+		selection.setStart(2);
+		selection.setLength(0);
+		Thread.sleep(100);
+		robot.mouseMove(ihm.getX()+60, ihm.getY()+34);
+		robot.mousePress(InputEvent.BUTTON1_MASK);
+		robot.mouseRelease(InputEvent.BUTTON1_MASK);
+		robot.mouseMove(ihm.getX()+60, ihm.getY()+150);
+		robot.mousePress(InputEvent.BUTTON1_MASK);
+		robot.mouseRelease(InputEvent.BUTTON1_MASK);
+		Thread.sleep(100);
+		Assert.assertTrue("Erase() - Text don't erase", buffer.getText().equals("a"));
+		Assert.assertTrue("Erase() - Selection parameters doesn't updated", selection.getStart() == 1 && selection.getLength() == 0);
+	
+		buffer.setText("abc");
+		selection.setStart(1);
+		selection.setLength(2);
+		Thread.sleep(100);
+		robot.mouseMove(ihm.getX()+60, ihm.getY()+34);
+		robot.mousePress(InputEvent.BUTTON1_MASK);
+		robot.mouseRelease(InputEvent.BUTTON1_MASK);
+		robot.mouseMove(ihm.getX()+60, ihm.getY()+150);
+		robot.mousePress(InputEvent.BUTTON1_MASK);
+		robot.mouseRelease(InputEvent.BUTTON1_MASK);
+		Thread.sleep(100);
+		Assert.assertTrue("Erase() - Text erase but no text to erase before curosr position", buffer.getText().equals("a"));
+		Assert.assertTrue("Erase() - Selection parameters doesn't updated", selection.getStart() == 1 && selection.getLength() == 0);
 	}
 }
