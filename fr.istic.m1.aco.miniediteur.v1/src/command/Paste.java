@@ -23,8 +23,7 @@ public class Paste implements Command {
 	@Override
 	public void execute() {
 		ihm.setCommandText("Ctrl + V");
-		String text = engine.paste();
-		setText(text);
+		engine.paste();
 	}
 	
 	@Override

@@ -34,6 +34,14 @@ public class TestEngineImpl {
 		selection.setLength(5);
 		engine.copy();
 		Assert.assertTrue("Copy() - Copy has updated Selection variables", selection.getLength() == 5 && selection.getStart() == 0);
+		Assert.assertTrue("Copy() - Buffer has been updated", buffer.getText().equals("value1")); 
+		Assert.assertTrue("Copy() - Text doesn't been copied in ClipBoard", clipboard.getText().equals("value"));
+		
+		buffer.setText("value1");
+		selection.setStart(0);
+		selection.setLength(5);
+		engine.copy();
+		Assert.assertTrue("Copy() - Copy has updated Selection variables", selection.getLength() == 5 && selection.getStart() == 0);
 		Assert.assertTrue("Copy() - Text doesn't been copied in ClipBoard", clipboard.getText().equals("value"));
 	}
 
@@ -59,7 +67,7 @@ public class TestEngineImpl {
 	}
 
 	@Test
-	public void testCut() {
+	public void testCut() {		
 		buffer.setText("value");
 		selection.setStart(0);
 		selection.setLength(4);
@@ -67,6 +75,14 @@ public class TestEngineImpl {
 		Assert.assertTrue("Cut() - Cut hasn't updated Selection variables", selection.getLength() == 0 && selection.getStart() == 0);
 		Assert.assertTrue("Cut() - Text doesn't been cut in Buffer", buffer.getText().equals("e"));
 		Assert.assertTrue("Cut() - Text doesn't been put in ClipBoard", clipboard.getText().equals("valu"));
+		
+		buffer.setText("value");
+		selection.setStart(0);
+		selection.setLength(0);
+		engine.cut();
+		Assert.assertTrue("Cut() - Cut hasn't updated Selection variables", selection.getLength() == 0 && selection.getStart() == 0);
+		Assert.assertTrue("Cut() - Text been cut in Buffer", buffer.getText().equals("value"));
+		Assert.assertTrue("Cut() - Text put in ClipBoard but selection empty", clipboard.getText().equals("valu"));
 	}
 
 	@Test

@@ -23,8 +23,7 @@ public class Copy implements Command {
 	@Override
 	public void execute() {
 		ihm.setCommandText("Ctrl + C");
-		String text = engine.copy();
-		setText(text);
+		engine.copy();
 	}
 
 	@Override

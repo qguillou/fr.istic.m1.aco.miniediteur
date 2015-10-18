@@ -23,8 +23,7 @@ public class Cut implements Command {
 	@Override
 	public void execute() {
 		ihm.setCommandText("Ctrl + X");
-		String text = engine.cut();
-		setText(text);
+		engine.cut();
 	}
 	
 	@Override

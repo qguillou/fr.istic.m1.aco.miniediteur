@@ -22,8 +22,7 @@ public class Type implements Command {
 	 */
 	@Override
 	public void execute() {
-		String text = engine.type();
-		setText(text);
+		engine.type();
 	}
 	
 	public String getText(){

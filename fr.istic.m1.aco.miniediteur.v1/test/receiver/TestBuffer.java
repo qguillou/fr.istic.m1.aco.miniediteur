@@ -34,6 +34,10 @@ public class TestBuffer {
 	
 	@Test
 	public void testCut() {
+		buffer.setText("value");
+		buffer.cut(0, 0);
+		Assert.assertTrue("Cut() - Text doesn't be cut", buffer.getText().equals("value"));
+		
 		buffer.setText("value1");
 		buffer.cut(5, 6);
 		Assert.assertTrue("Cut() - Text doesn't be cut", buffer.getText().equals("value"));

@@ -44,10 +44,4 @@ public class Select implements Command {
 	public int getSelectionEnd() {
 		return ihm.getTextArea().getSelectionEnd();
 	}
-	
-	public void setSelection(int start, int end){
-		ihm.getTextArea().setSelectionStart(start);
-		ihm.getTextArea().setSelectionEnd(end);
-		ihm.getTextArea().getCaret().setVisible(true);
-	}
 }

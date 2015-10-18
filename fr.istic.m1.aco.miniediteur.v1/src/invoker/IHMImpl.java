@@ -30,11 +30,12 @@ public class IHMImpl extends JFrame implements IHM {
 
 	public IHMImpl(IHMListener listener) {
 		super();
+		listener.setIHM(this);
 		area =  new TextArea();
 		area.create();
 		
 		this.listener = listener;
-		area.addCaretListener(listener);
+		area.addMouseListener(listener);
 		area.addKeyListener(listener);
 		
 		action = new JLabel(" ");

@@ -4,13 +4,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JOptionPane;
 import javax.swing.event.*;
 
 import command.Command;
 
-public class IHMListener implements CaretListener, KeyListener, ActionListener {
+public class IHMListener implements MouseListener, KeyListener, ActionListener {
 	
 	private Command copy;
 	private Command cut;
@@ -20,14 +22,19 @@ public class IHMListener implements CaretListener, KeyListener, ActionListener {
 	private Command type;
 	
 	private String text;
+	private IHM ihm;
 		
 	public IHMListener(){
 		text = "";
 	}
 	
-	@Override
+	public void setIHM(IHM ihm){
+		this.ihm = ihm;
+	}
+	
+	
 	public void caretUpdate(CaretEvent event) {
-		select.execute();
+		
 	}
 	
 	public void setCommand(Command copy, Command cut, Command erase, Command paste, Command select, Command type) {
@@ -110,5 +117,27 @@ public class IHMListener implements CaretListener, KeyListener, ActionListener {
 				    JOptionPane.PLAIN_MESSAGE);
 			break;
 		}
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent arg0) {
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
+	}
+
+	@Override
+	public void mouseExited(MouseEvent arg0) {
+	}
+
+	@Override
+	public void mousePressed(MouseEvent arg0) {
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent arg0) {
+		select.execute();
+		ihm.getTextArea().getCaret().setVisible(true);
 	}
 }

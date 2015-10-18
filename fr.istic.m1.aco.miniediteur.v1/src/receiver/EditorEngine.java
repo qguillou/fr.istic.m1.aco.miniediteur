@@ -1,5 +1,6 @@
 package receiver;
 
+import observer.Observer;
 import command.Command;
 
 /**
@@ -9,19 +10,25 @@ import command.Command;
  */
 
 public interface EditorEngine {
-	public String copy();
+	public void copy();
 	
-	public String paste() throws NumberFormatException;
+	public void paste() throws NumberFormatException;
 	
-	public String cut() throws NumberFormatException;
+	public void cut() throws NumberFormatException;
 	
-	public String erase() throws NumberFormatException;
+	public void erase() throws NumberFormatException;
 	
-	public String type() throws NumberFormatException;
+	public void type() throws NumberFormatException;
 	
-	public String select() throws NumberFormatException;
+	public void select() throws NumberFormatException;
 	
 	public String getText() throws NumberFormatException;
 
 	public void setCommand(Command copy, Command cut, Command erase, Command paste, Command select, Command type);
+
+	public int getSelectionStart();
+	
+	public int getSelectionEnd();
+
+	public void registerObserver(Observer o);
 }

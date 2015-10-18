@@ -145,7 +145,7 @@ public class TestIHM {
 		Thread.sleep(100);
 		robot.keyRelease(KeyEvent.VK_CONTROL);
 		Assert.assertTrue("Paste() - Text paste but no text in clipboard", buffer.getText().equals("ab"));
-		Assert.assertTrue("Paste() - Selection parameters doesn't updated", selection.getStart() == 2 && selection.getLength() == 0);
+		Assert.assertTrue("Paste() - Selection parameters doesn't updated", selection.getStart() == 0 && selection.getLength() == 0);
 		
 		clipboard.setText("d");
 		selection.setStart(2);
@@ -271,7 +271,7 @@ public class TestIHM {
 		robot.mouseRelease(InputEvent.BUTTON1_MASK);
 		Thread.sleep(100);
 		Assert.assertTrue("Paste() - Text paste but no text in clipboard", buffer.getText().equals("ab"));
-		Assert.assertTrue("Paste() - Selection parameters doesn't updated", selection.getStart() == 2 && selection.getLength() == 0);
+		Assert.assertTrue("Paste() - Selection parameters doesn't updated", selection.getStart() == 0 && selection.getLength() == 0);
 		
 		clipboard.setText("d");
 		selection.setStart(2);
@@ -418,7 +418,7 @@ public class TestIHM {
 		robot.mouseRelease(InputEvent.BUTTON1_MASK);
 		Thread.sleep(100);
 		Assert.assertTrue("Paste() - Text paste but no text in clipboard", buffer.getText().equals("ab"));
-		Assert.assertTrue("Paste() - Selection parameters doesn't updated", selection.getStart() == 2 && selection.getLength() == 0);
+		Assert.assertTrue("Paste() - Selection parameters doesn't updated", selection.getStart() == 0 && selection.getLength() == 0);
 		
 		clipboard.setText("d");
 		selection.setStart(2);

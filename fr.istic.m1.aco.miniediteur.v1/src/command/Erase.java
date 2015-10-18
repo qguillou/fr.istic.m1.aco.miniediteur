@@ -23,8 +23,7 @@ public class Erase implements Command {
 	@Override
 	public void execute() {
 		ihm.setCommandText("BACK SPACE");
-		String text = engine.erase();
-		setText(text);
+		engine.erase();
 	}
 	
 	@Override

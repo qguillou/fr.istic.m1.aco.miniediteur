@@ -1,5 +1,9 @@
 package receiver;
 
+import java.util.ArrayList;
+
+import observer.Observer;
+import observer.Subject;
 import command.Command;
 
 
@@ -9,7 +13,7 @@ import command.Command;
  * @author Yann Jegu & Quentin Guillou
  * @version 1.0
  */
-public class EngineImpl implements EditorEngine {
+public class EngineImpl extends Subject implements EditorEngine  {
 	private Selection selection;	
 	private ClipBoard clipboard;	
 	private Buffer buffer;
@@ -31,6 +35,8 @@ public class EngineImpl implements EditorEngine {
 		this.selection = selection;
 		this.clipboard = clipboard;
 		this.buffer = buffer;
+		
+		this.observers = new ArrayList<Observer>();
 	}
 	
 	@Override
@@ -38,14 +44,14 @@ public class EngineImpl implements EditorEngine {
 	 * copy()
 	 * copy text into clipboard
 	 */
-	public String copy() {
+	public void copy() {
 		int start = selection.getStart();
 		int end = start + selection.getLength();
-		
-		String text = buffer.copy(start, end);
-		clipboard.setText(text);
-		
-		return getText();
+		if(start != end){
+			String text = buffer.copy(start, end);
+			clipboard.setText(text);
+		}
+		notifyObservers();
 	}
 
 	@Override
@@ -53,7 +59,7 @@ public class EngineImpl implements EditorEngine {
 	 * paste()
 	 * paste text into buffer
 	 */
-	public String paste() {
+	public void paste() {
 		String text = clipboard.getText();
 		int start = selection.getStart();
 		int end = start + selection.getLength();
@@ -62,7 +68,7 @@ public class EngineImpl implements EditorEngine {
 		selection.setLength(0);
 		selection.setStart(start + text.length());
 		
-		return getText();
+		notifyObservers();
 	}
 
 	@Override
@@ -70,14 +76,15 @@ public class EngineImpl implements EditorEngine {
 	 * cut()
 	 * cut text into buffer and put text into clipboard
 	 */
-	public String cut() {
+	public void cut() {
 		int start = selection.getStart();
 		int end = start + selection.getLength();
-		String text = buffer.cut(start, end);
-		selection.setLength(0);
-		clipboard.setText(text);
-		
-		return getText();
+		if(start != end){
+			String text = buffer.cut(start, end);
+			selection.setLength(0);
+			clipboard.setText(text);
+		}		
+		notifyObservers();
 	}
 
 	@Override
@@ -85,7 +92,7 @@ public class EngineImpl implements EditorEngine {
 	 * erase()
 	 * erase text into buffer
 	 */
-	public String erase() {
+	public void erase() {
 		int start = selection.getStart();
 		int end = start + selection.getLength();
 		if(start == end)
@@ -97,7 +104,7 @@ public class EngineImpl implements EditorEngine {
 			selection.setStart(start);
 		}
 		
-		return getText();
+		notifyObservers();
 	}
 
 	@Override
@@ -105,7 +112,7 @@ public class EngineImpl implements EditorEngine {
 	 * type()
 	 * type text into buffer
 	 */
-	public String type() {
+	public void type() {
 		String text = type.getText();
 		int start = selection.getStart();
 		int end = start + selection.getLength();
@@ -114,7 +121,7 @@ public class EngineImpl implements EditorEngine {
 		selection.setStart(start + text.length());
 		selection.setLength(0);
 		
-		return getText();
+		notifyObservers();
 	}
 	
 	@Override
@@ -124,16 +131,14 @@ public class EngineImpl implements EditorEngine {
 	 * @param start: the start of new selection
 	 * @param length: the length of new selection
 	 */
-	public String select() throws NumberFormatException {
+	public void select() throws NumberFormatException {
 		int start = select.getSelectionStart();
 		int length = select.getSelectionEnd() - start;
 		
-		System.out.println("start "+start+"length "+length);
-		
 		selection.setStart(start);
 		selection.setLength(length);
-
-		return getText();
+		
+		notifyObservers();
 	}
 
 	@Override
@@ -162,5 +167,33 @@ public class EngineImpl implements EditorEngine {
 		this.paste = paste;
 		this.select = select;
 		this.type = type;
+	}
+
+	@Override
+	public int getSelectionStart() {
+		return selection.getStart();
+	}
+
+	@Override
+	public int getSelectionEnd() {
+		return selection.getStart() + selection.getLength();
+	}
+
+	@Override
+	public void notifyObservers() {
+		for (Observer observer : observers) {
+	         observer.notifyObserver();
+	      }
+	}
+
+	@Override
+	public void registerObserver(Observer o) {
+		o.registerSubject(this);
+		observers.add(o);
+	}
+
+	@Override
+	public void unregisterObserver(Observer o) {
+		observers.remove(o);
 	}
 }

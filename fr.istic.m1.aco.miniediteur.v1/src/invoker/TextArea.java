@@ -6,13 +6,14 @@ import java.awt.Insets;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
+import observer.Observer;
+import receiver.EditorEngine;
+
 @SuppressWarnings("serial")
-public class TextArea extends JTextArea{
+public class TextArea extends JTextArea implements Observer {
 	
-	public TextArea(){
+	protected EditorEngine subject;
 		
-	}
-	
 	public void create(){
 		setEditable(false);
 		getCaret().setVisible(true);
@@ -24,5 +25,22 @@ public class TextArea extends JTextArea{
 	public JScrollPane getScrollArea(){
 		JScrollPane scroll = new JScrollPane(this,JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		return scroll;
+	}
+	
+	public void update(String text, int start, int end){
+		setText(text);
+		setSelectionStart(start);
+		setSelectionEnd(end);
+		requestFocusInWindow();
+	}
+
+	@Override
+	public void notifyObserver() {
+		update(subject.getText(), subject.getSelectionStart(), subject.getSelectionEnd());
+	}
+
+	@Override
+	public void registerSubject(EditorEngine engineImpl) {
+		subject = engineImpl;
 	}
 }
