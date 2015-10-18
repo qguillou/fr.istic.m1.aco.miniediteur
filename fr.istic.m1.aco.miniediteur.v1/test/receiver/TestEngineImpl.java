@@ -1,9 +1,16 @@
 package receiver;
 
 
+import invoker.IHM;
+import invoker.IHMImpl;
+import invoker.IHMListener;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+
+import command.Select;
+import command.Type;
 
 public class TestEngineImpl {
 	
@@ -83,6 +90,9 @@ public class TestEngineImpl {
 
 	@Test
 	public void testType() {
+		IHM ihm = new IHMImpl(new IHMListener());
+		engine.setCommand(null, null, null, null, null, new Type(engine, ihm));
+		
 		// Test without selected text
 		buffer.setText("value");
 		selection.setStart(5);
@@ -102,8 +112,10 @@ public class TestEngineImpl {
 	
 	@Test
 	public void testSelect() {
+		IHM ihm = new IHMImpl(new IHMListener());
+		engine.setCommand(null, null, null, null, new Select(engine, ihm), null);
 		engine.select();
-		Assert.assertTrue("SetSelection() - SetSelection hasn't updated Selection variables", selection.getLength() == 1 && selection.getStart() == 1);
+		Assert.assertTrue("SetSelection() - SetSelection hasn't updated Selection variables", selection.getLength() == 0 && selection.getStart() == 0);
 	}
 	
 	@Test

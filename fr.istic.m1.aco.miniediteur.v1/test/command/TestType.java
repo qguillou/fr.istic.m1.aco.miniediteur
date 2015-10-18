@@ -31,12 +31,13 @@ public class TestType {
 		selection = new Selection();
 		engine = new EngineImpl(selection, clipboard, buffer);
 		command = new Type(engine, ihm);
+		engine.setCommand(null, null, null, null, null, command);
 	}
 	
 	@Test
 	public void testExecute() {
 		Assert.assertTrue("Execute() - Variable aren't initialize at default value", buffer.getText().equals(""));
-		//TO DO
-		//After IHM implementation
+		command.execute();
+		Assert.assertTrue("Execute() - Variable aren't initialize at default value", buffer.getText().equals(""));
 	}
 }
