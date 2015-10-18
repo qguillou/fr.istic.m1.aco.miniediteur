@@ -4,7 +4,7 @@ import invoker.IHM;
 import receiver.EditorEngine;
 
 public class Select implements Command {
-	
+
 	private IHM ihm;
 	private EditorEngine engine;
 	
