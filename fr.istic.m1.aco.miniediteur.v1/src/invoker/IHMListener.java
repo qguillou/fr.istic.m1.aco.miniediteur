@@ -6,6 +6,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.swing.JOptionPane;
 import javax.swing.event.*;
@@ -20,26 +22,18 @@ public class IHMListener implements MouseListener, KeyListener, ActionListener {
 	private Command paste;
 	private Command select;
 	private Command type;
+	private Command delete;
 	
-	private IHM ihm;
 	private char lastChar;
-		
-	public void setIHM(IHM ihm){
-		this.ihm = ihm;
-	}
 	
-	
-	public void caretUpdate(CaretEvent event) {
-		
-	}
-	
-	public void setCommand(Command copy, Command cut, Command erase, Command paste, Command select, Command type) {
+	public void setCommand(Command copy, Command cut, Command erase, Command paste, Command select, Command type, Command delete) {
 		this.copy = copy;
 		this.cut = cut;
 		this.erase = erase;
 		this.paste = paste;
 		this.select = select;
 		this.type = type;
+		this.delete = delete;
 	}
 
 	public char getLastChar() {
@@ -48,31 +42,15 @@ public class IHMListener implements MouseListener, KeyListener, ActionListener {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		if ((e.getModifiers() & KeyEvent.CTRL_MASK) != 0) {
-			switch(e.getKeyCode()) {
-			case KeyEvent.VK_C:
-				copy.execute();
-				break;
-			case KeyEvent.VK_V:
-				paste.execute();
-				break;
-			case KeyEvent.VK_X:
-				cut.execute();
-				break;
-			case KeyEvent.VK_A:
-				ihm.getTextArea().setSelectionStart(0);
-				ihm.getTextArea().setSelectionEnd(ihm.getTextArea().getText().length());
-				select.execute();
-				break;
-            }
-        }
-		else {
+		if ((e.getModifiers() & KeyEvent.CTRL_MASK) == 0) {
 			switch(e.getKeyCode()) {
 			case KeyEvent.VK_DELETE:
+				delete.execute();
 				break;
 			case KeyEvent.VK_BACK_SPACE:
 				erase.execute();
 				break;
+			
 			default:
 				if(e.getKeyChar() != KeyEvent.CHAR_UNDEFINED){
 					lastChar = e.getKeyChar();
@@ -85,7 +63,30 @@ public class IHMListener implements MouseListener, KeyListener, ActionListener {
 	@Override
 	public void keyReleased(KeyEvent e) {
 		if ((e.getModifiers() & KeyEvent.CTRL_MASK) != 0) {
-			
+			switch(e.getKeyCode()) {
+			case KeyEvent.VK_C:
+				copy.execute();
+				break;
+			case KeyEvent.VK_V:
+				paste.execute();
+				break;
+			case KeyEvent.VK_X:
+				cut.execute();
+				break;
+			case KeyEvent.VK_A:
+				select.execute();
+				break;
+			case KeyEvent.VK_LEFT:
+			case KeyEvent.VK_RIGHT:
+			case KeyEvent.VK_UP:
+			case KeyEvent.VK_DOWN:
+			case KeyEvent.VK_PAGE_UP:
+			case KeyEvent.VK_PAGE_DOWN:
+			case KeyEvent.VK_END:
+			case KeyEvent.VK_HOME:
+				select.execute();
+				break;
+            }
         }
 		else {
 			switch(e.getKeyCode()) {

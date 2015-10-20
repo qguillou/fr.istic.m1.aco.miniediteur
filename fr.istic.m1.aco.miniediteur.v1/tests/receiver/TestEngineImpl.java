@@ -144,6 +144,34 @@ public class TestEngineImpl {
 		Assert.assertTrue("Erase() - Buffer content isn't the set text", buffer.getText().equals(""));
 		Assert.assertTrue("Erase() - Selection isn't (0, 0)", selection.getStart() == 0 && selection.getLength() == 0);
 	}
+	
+	@Test
+	public void testDelete() {
+		engine.delete();
+		Assert.assertTrue("Delete() - Buffer isn't empty", buffer.getText().equals(""));
+		Assert.assertTrue("Delete() - Selection isn't (0, 0)", selection.getStart() == 0 && selection.getLength() == 0);
+		
+		buffer.setText("test");
+		engine.delete();
+		Assert.assertTrue("Delete() - Buffer content isn't the set text", buffer.getText().equals("est"));
+		Assert.assertTrue("Delete() - Selection isn't (0, 0)", selection.getStart() == 0 && selection.getLength() == 0);
+		
+		buffer.setText("test");
+		selection.setStart(4);
+		engine.delete();
+		Assert.assertTrue("Delete() - Buffer content isn't the set text", buffer.getText().equals("test"));
+		Assert.assertTrue("Delete() - Selection isn't (4, 0)", selection.getStart() == 4 && selection.getLength() == 0);
+		
+		selection.setStart(0);
+		selection.setLength(3);
+		engine.delete();
+		Assert.assertTrue("Delete() - Buffer content isn't the set text", buffer.getText().equals("t"));
+		Assert.assertTrue("Delete() - Selection isn't (0, 0)", selection.getStart() == 0 && selection.getLength() == 0);
+		
+		engine.delete();
+		Assert.assertTrue("Delete() - Buffer content isn't the set text", buffer.getText().equals(""));
+		Assert.assertTrue("Delete() - Selection isn't (0, 0)", selection.getStart() == 0 && selection.getLength() == 0);
+	}
 
 	@Test
 	public void testType() {

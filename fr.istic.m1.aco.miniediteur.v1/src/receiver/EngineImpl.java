@@ -97,6 +97,26 @@ public class EngineImpl extends Subject implements EditorEngine  {
 		
 		notifyObservers();
 	}
+	
+	@Override
+	/**
+	 * erase()
+	 * erase text into buffer
+	 */
+	public void delete() {
+		int start = selection.getStart();
+		int end = start + selection.getLength();
+		if(start == end)
+			end++;
+		
+		if(end <= getText().length()){
+			buffer.erase(start, end);
+			selection.setLength(0);
+			selection.setStart(start);
+		}
+		
+		notifyObservers();
+	}
 
 	@Override
 	/**

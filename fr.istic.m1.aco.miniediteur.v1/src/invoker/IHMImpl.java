@@ -30,7 +30,6 @@ public class IHMImpl extends JFrame implements IHM {
 
 	public IHMImpl(IHMListener listener) {
 		super();
-		listener.setIHM(this);
 		area =  new TextArea();
 		area.create();
 		

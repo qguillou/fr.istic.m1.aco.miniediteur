@@ -17,6 +17,8 @@ public interface EditorEngine {
 	
 	public void erase() throws NumberFormatException;
 	
+	public void delete() throws NumberFormatException;
+	
 	public void type(char c) throws NumberFormatException;
 	
 	public void select(int start, int length) throws NumberFormatException;

@@ -3,6 +3,7 @@ package main;
 import command.Command;
 import command.Copy;
 import command.Cut;
+import command.Delete;
 import command.Erase;
 import command.Paste;
 import command.Select;
@@ -34,7 +35,8 @@ public class Editeur {
 		Command paste = new Paste(engine, ihm);
 		Command select = new Select(engine, ihm);
 		Command type = new Type(engine, ihm);
-		listener.setCommand(copy, cut, erase, paste, select, type);
+		Command delete = new Delete(engine, ihm);
+		listener.setCommand(copy, cut, erase, paste, select, type, delete);
 		
 		ihm.createView();
 	}
