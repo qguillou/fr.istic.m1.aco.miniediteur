@@ -23,7 +23,7 @@ public class Select implements Command {
 	@Override
 	public void execute() {
 		int start = ihm.getTextArea().getSelectionStart();
-		int length = ihm.getTextArea().getSelectedText().length();
+		int length = ihm.getTextArea().getSelectionEnd() - start;
 		engine.select(start, length);
 	}
 }
