@@ -21,13 +21,9 @@ public class IHMListener implements MouseListener, KeyListener, ActionListener {
 	private Command select;
 	private Command type;
 	
-	private String text;
 	private IHM ihm;
+	private char lastChar;
 		
-	public IHMListener(){
-		text = "";
-	}
-	
 	public void setIHM(IHM ihm){
 		this.ihm = ihm;
 	}
@@ -46,10 +42,8 @@ public class IHMListener implements MouseListener, KeyListener, ActionListener {
 		this.type = type;
 	}
 
-	public String getText() {
-		String text_to_type = text;
-		text = "";
-		return text_to_type;
+	public char getLastChar() {
+		return this.lastChar;
 	}
 
 	@Override
@@ -80,9 +74,8 @@ public class IHMListener implements MouseListener, KeyListener, ActionListener {
 				erase.execute();
 				break;
 			default:
-				char lettre = e.getKeyChar();
-				if(lettre != KeyEvent.CHAR_UNDEFINED){
-					text += lettre;
+				if(e.getKeyChar() != KeyEvent.CHAR_UNDEFINED){
+					lastChar = e.getKeyChar();
 					type.execute();
 				}				
 			}

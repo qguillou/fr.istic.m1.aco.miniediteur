@@ -35,7 +35,6 @@ public class Editeur {
 		Command select = new Select(engine, ihm);
 		Command type = new Type(engine, ihm);
 		listener.setCommand(copy, cut, erase, paste, select, type);
-		engine.setCommand(copy, cut, erase, paste, select, type);
 		
 		ihm.createView();
 	}

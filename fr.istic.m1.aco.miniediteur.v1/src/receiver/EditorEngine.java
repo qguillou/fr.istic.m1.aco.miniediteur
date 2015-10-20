@@ -1,7 +1,6 @@
 package receiver;
 
 import observer.Observer;
-import command.Command;
 
 /**
  * EditorEngine - Interface
@@ -18,13 +17,11 @@ public interface EditorEngine {
 	
 	public void erase() throws NumberFormatException;
 	
-	public void type() throws NumberFormatException;
+	public void type(char c) throws NumberFormatException;
 	
-	public void select() throws NumberFormatException;
+	public void select(int start, int length) throws NumberFormatException;
 	
 	public String getText() throws NumberFormatException;
-
-	public void setCommand(Command copy, Command cut, Command erase, Command paste, Command select, Command type);
 
 	public int getSelectionStart();
 	

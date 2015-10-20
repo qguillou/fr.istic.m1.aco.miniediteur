@@ -25,24 +25,4 @@ public class Paste implements Command {
 		ihm.setCommandText("Ctrl + V");
 		engine.paste();
 	}
-	
-	@Override
-	public String getText() {
-		return "";
-	}
-	
-	@Override
-	public void setText(String text) {
-		ihm.getTextArea().setText(text);
-	}
-	
-	@Override
-	public int getSelectionStart(){
-		return ihm.getTextArea().getSelectionStart();
-	}
-
-	@Override
-	public int getSelectionEnd() {
-		return ihm.getTextArea().getSelectionEnd();
-	}
 }

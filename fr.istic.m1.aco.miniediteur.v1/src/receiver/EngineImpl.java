@@ -4,8 +4,6 @@ import java.util.ArrayList;
 
 import observer.Observer;
 import observer.Subject;
-import command.Command;
-
 
 /**
  * EngineImpl
@@ -17,13 +15,6 @@ public class EngineImpl extends Subject implements EditorEngine  {
 	private Selection selection;	
 	private ClipBoard clipboard;	
 	private Buffer buffer;
-	
-	private Command copy;
-	private Command cut;
-	private Command erase;
-	private Command paste;
-	private Command select;
-	private Command type;
 	
 	/**
 	 * EngineImpl() - Constructor
@@ -111,14 +102,14 @@ public class EngineImpl extends Subject implements EditorEngine  {
 	/**
 	 * type()
 	 * type text into buffer
+	 * @param c: the last char typed
 	 */
-	public void type() {
-		String text = type.getText();
+	public void type(char c) {
 		int start = selection.getStart();
 		int end = start + selection.getLength();
 		
-		buffer.type(text, start, end);
-		selection.setStart(start + text.length());
+		buffer.type(c, start, end);
+		selection.setStart(start + 1);
 		selection.setLength(0);
 		
 		notifyObservers();
@@ -131,9 +122,7 @@ public class EngineImpl extends Subject implements EditorEngine  {
 	 * @param start: the start of new selection
 	 * @param length: the length of new selection
 	 */
-	public void select() throws NumberFormatException {
-		int start = select.getSelectionStart();
-		int length = select.getSelectionEnd() - start;
+	public void select(int start, int length) throws NumberFormatException {
 		selection.setStart(start);
 		selection.setLength(length);
 		
@@ -150,23 +139,6 @@ public class EngineImpl extends Subject implements EditorEngine  {
 		return buffer.getText();
 	}
 	
-	/**
-	 * 
-	 * @param copy
-	 * @param cut
-	 * @param erase
-	 * @param paste
-	 * @param select
-	 * @param type
-	 */
-	public void setCommand(Command copy, Command cut, Command erase, Command paste, Command select, Command type) {
-		this.copy = copy;
-		this.cut = cut;
-		this.erase = erase;
-		this.paste = paste;
-		this.select = select;
-		this.type = type;
-	}
 
 	@Override
 	public int getSelectionStart() {

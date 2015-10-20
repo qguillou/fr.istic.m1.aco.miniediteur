@@ -22,26 +22,8 @@ public class Select implements Command {
 	 */
 	@Override
 	public void execute() {
-		engine.select();
-	}
-	
-	@Override
-	public String getText() {
-		return null;
-	}
-	
-	@Override
-	public void setText(String text) {
-		ihm.getTextArea().setText(text);
-	}
-	
-	@Override
-	public int getSelectionStart(){
-		return ihm.getTextArea().getSelectionStart();
-	}
-
-	@Override
-	public int getSelectionEnd() {
-		return ihm.getTextArea().getSelectionEnd();
+		int start = ihm.getTextArea().getSelectionStart();
+		int length = ihm.getTextArea().getSelectedText().length();
+		engine.select(start, length);
 	}
 }

@@ -23,25 +23,6 @@ public class Type implements Command {
 	@Override
 	public void execute() {
 		ihm.setCommandText(" ");
-		engine.type();
-	}
-	
-	public String getText(){
-		return ihm.getListener().getText();
-	}
-	
-	@Override
-	public void setText(String text) {
-		ihm.getTextArea().setText(text);
-	}
-	
-	@Override
-	public int getSelectionStart(){
-		return ihm.getTextArea().getSelectionStart();
-	}
-
-	@Override
-	public int getSelectionEnd() {
-		return ihm.getTextArea().getSelectionEnd();
+		engine.type(ihm.getListener().getLastChar());
 	}
 }

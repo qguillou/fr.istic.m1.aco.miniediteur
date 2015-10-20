@@ -88,8 +88,8 @@ public class Buffer {
 	 * @param start: the start index of selection
 	 * @param end: the end index of selection
 	 */
-	public void type(String text, int start, int end){
+	public void type(char c, int start, int end){
 		this.text = this.text.delete(start, end);
-		this.text = this.text.insert(start, text);
+		this.text = this.text.insert(start, c);
 	}
 }
