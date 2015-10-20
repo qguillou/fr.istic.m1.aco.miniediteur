@@ -25,7 +25,7 @@ public interface EditorEngine {
 
 	public int getSelectionStart();
 	
-	public int getSelectionEnd();
+	public int getSelectionLength();
 
 	public void registerObserver(Observer o);
 }

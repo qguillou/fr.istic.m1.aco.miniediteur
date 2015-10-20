@@ -37,7 +37,7 @@ public class TextArea extends JTextArea implements Observer {
 
 	@Override
 	public void notifyObserver() {
-		update(subject.getText(), subject.getSelectionStart(), subject.getSelectionEnd());
+		update(subject.getText(), subject.getSelectionStart(), subject.getSelectionLength() + subject.getSelectionStart());
 	}
 
 	@Override

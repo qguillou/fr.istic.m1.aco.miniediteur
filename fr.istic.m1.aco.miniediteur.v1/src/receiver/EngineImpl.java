@@ -146,8 +146,8 @@ public class EngineImpl extends Subject implements EditorEngine  {
 	}
 
 	@Override
-	public int getSelectionEnd() {
-		return selection.getStart() + selection.getLength();
+	public int getSelectionLength() {
+		return selection.getLength();
 	}
 
 	@Override
