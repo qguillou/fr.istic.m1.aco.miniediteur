@@ -44,4 +44,11 @@ public class TextArea extends JTextArea implements Observer {
 	public void registerSubject(EditorEngine engineImpl) {
 		subject = engineImpl;
 	}
+
+	public void help() {
+		String help = "Help\n\n";
+		help += "To exit help, type something in the textarea\n\n";
+		help += "Basics commands are available by \"Edit\" menu, toolbar bouton or shortcut.\n";
+		setText(help);
+	}
 }

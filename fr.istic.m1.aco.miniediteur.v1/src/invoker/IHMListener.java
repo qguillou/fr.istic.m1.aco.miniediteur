@@ -6,34 +6,27 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.swing.JOptionPane;
-import javax.swing.event.*;
 
 import command.Command;
 
 public class IHMListener implements MouseListener, KeyListener, ActionListener {
-	
-	private Command copy;
-	private Command cut;
-	private Command erase;
-	private Command paste;
-	private Command select;
-	private Command type;
-	private Command delete;
-	
+		
 	private char lastChar;
 	
-	public void setCommand(Command copy, Command cut, Command erase, Command paste, Command select, Command type, Command delete) {
-		this.copy = copy;
-		this.cut = cut;
-		this.erase = erase;
-		this.paste = paste;
-		this.select = select;
-		this.type = type;
-		this.delete = delete;
+	//Map which contains all command
+	private Map<String, Command> commands;
+	
+	private IHM ihm;
+	
+	public void setIHM(IHM ihm){
+		this.ihm = ihm;
+	}
+	
+	public void setCommand(Map<String, Command> commands) {
+		this.commands = commands;
 	}
 
 	public char getLastChar() {
@@ -45,16 +38,16 @@ public class IHMListener implements MouseListener, KeyListener, ActionListener {
 		if ((e.getModifiers() & KeyEvent.CTRL_MASK) == 0) {
 			switch(e.getKeyCode()) {
 			case KeyEvent.VK_DELETE:
-				delete.execute();
+				commands.get("delete").execute();
 				break;
 			case KeyEvent.VK_BACK_SPACE:
-				erase.execute();
+				commands.get("erase").execute();
 				break;
 			
 			default:
 				if(e.getKeyChar() != KeyEvent.CHAR_UNDEFINED){
 					lastChar = e.getKeyChar();
-					type.execute();
+					commands.get("type").execute();
 				}				
 			}
 		}	
@@ -65,17 +58,15 @@ public class IHMListener implements MouseListener, KeyListener, ActionListener {
 		if ((e.getModifiers() & KeyEvent.CTRL_MASK) != 0) {
 			switch(e.getKeyCode()) {
 			case KeyEvent.VK_C:
-				copy.execute();
+				commands.get("copy").execute();
 				break;
 			case KeyEvent.VK_V:
-				paste.execute();
+				commands.get("paste").execute();
 				break;
 			case KeyEvent.VK_X:
-				cut.execute();
+				commands.get("cut").execute();
 				break;
 			case KeyEvent.VK_A:
-				select.execute();
-				break;
 			case KeyEvent.VK_LEFT:
 			case KeyEvent.VK_RIGHT:
 			case KeyEvent.VK_UP:
@@ -84,7 +75,7 @@ public class IHMListener implements MouseListener, KeyListener, ActionListener {
 			case KeyEvent.VK_PAGE_DOWN:
 			case KeyEvent.VK_END:
 			case KeyEvent.VK_HOME:
-				select.execute();
+				commands.get("select").execute();
 				break;
             }
         }
@@ -98,7 +89,7 @@ public class IHMListener implements MouseListener, KeyListener, ActionListener {
 			case KeyEvent.VK_PAGE_DOWN:
 			case KeyEvent.VK_END:
 			case KeyEvent.VK_HOME:
-				select.execute();
+				commands.get("select").execute();
 				break;				
 			}
 		}
@@ -113,22 +104,28 @@ public class IHMListener implements MouseListener, KeyListener, ActionListener {
 	public void actionPerformed(ActionEvent e) {
 		switch(e.getActionCommand()){
 		case "Cut":
-			cut.execute();
+			commands.get("cut").execute();
 			break;
 		case "Copy":
-			copy.execute();
+			commands.get("copy").execute();
 			break;
 		case "Paste":
-			paste.execute();
+			commands.get("paste").execute();
 			break;
 		case "Erase":
-			erase.execute();
+			commands.get("erase").execute();
 			break;
 		case "About":
 			JOptionPane.showMessageDialog(JOptionPane.getRootFrame(),
 				    "ACO Project\nDeveloped by Yann JEGU & Quentin GUILLOU\nVersion 1.0 October, 2015",
 				    "About Editext",
 				    JOptionPane.PLAIN_MESSAGE);
+			break;
+		case "Exit":
+			ihm.close();
+			break;
+		case "Help":
+			ihm.getTextArea().help();
 			break;
 		}
 	}
@@ -151,6 +148,6 @@ public class IHMListener implements MouseListener, KeyListener, ActionListener {
 
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
-		select.execute();
+		commands.get("select").execute();
 	}
 }

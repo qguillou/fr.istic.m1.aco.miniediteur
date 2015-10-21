@@ -1,5 +1,8 @@
 package main;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import command.Command;
 import command.Copy;
 import command.Cut;
@@ -36,7 +39,17 @@ public class Editeur {
 		Command select = new Select(engine, ihm);
 		Command type = new Type(engine, ihm);
 		Command delete = new Delete(engine, ihm);
-		listener.setCommand(copy, cut, erase, paste, select, type, delete);
+		
+		Map<String, Command> commands = new HashMap<String, Command>();
+		commands.put("copy", copy);
+		commands.put("cut", cut);
+		commands.put("erase", erase);
+		commands.put("paste", paste);
+		commands.put("select", select);
+		commands.put("type", type);
+		commands.put("delete", delete);
+		
+		listener.setCommand(commands);
 		
 		ihm.createView();
 	}

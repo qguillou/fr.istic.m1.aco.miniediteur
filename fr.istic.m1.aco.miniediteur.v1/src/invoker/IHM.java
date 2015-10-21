@@ -17,4 +17,6 @@ public interface IHM {
 	public IHMListener getListener();
 	
 	public void setCommandText(String text);
+
+	public void close();
 }

@@ -3,12 +3,20 @@ package command;
 import invoker.IHM;
 import receiver.EditorEngine;
 
+/**
+ * Delete<br/>
+ * implement Command<br/><br/>
+ * Command to delete text
+ * @author Yann Jegu & Quentin Guillou
+ * @version 1.0
+ */
 public class Delete implements Command {
 
 	private IHM ihm;
 	private EditorEngine engine;
 	
 	/**
+	 * Delete() <br/>
 	 * Construct the Command Delete
 	 * @param engine the engine which will receive the command
 	 */
@@ -18,7 +26,8 @@ public class Delete implements Command {
 	}
 	
 	/**
-	 * Execute the Erase Command
+	 * Execute() <br/>
+	 * Execute the delete Command
 	 */
 	@Override
 	public void execute() {

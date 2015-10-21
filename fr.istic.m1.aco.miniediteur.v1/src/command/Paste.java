@@ -3,12 +3,20 @@ package command;
 import invoker.IHM;
 import receiver.EditorEngine;
 
+/**
+ * Paste<br/>
+ * implement Command<br/><br/>
+ * Command to paste text
+ * @author Yann Jegu & Quentin Guillou
+ * @version 1.0
+ */
 public class Paste implements Command {
 
 	private IHM ihm;
 	private EditorEngine engine;
 	
 	/**
+	 * Paste() <br/>
 	 * Construct the Command Paste
 	 * @param engine the engine which will receive the command
 	 */
@@ -18,6 +26,7 @@ public class Paste implements Command {
 	}
 	
 	/**
+	 * Execute() <br/>
 	 * Execute the Paste Command
 	 */
 	@Override

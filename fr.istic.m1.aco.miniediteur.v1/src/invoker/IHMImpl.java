@@ -33,9 +33,10 @@ public class IHMImpl extends JFrame implements IHM {
 		area =  new TextArea();
 		area.create();
 		
-		this.listener = listener;
+		this.listener = listener;		
 		area.addMouseListener(listener);
 		area.addKeyListener(listener);
+		listener.setIHM(this);
 		
 		action = new JLabel(" ");
 	}
@@ -80,6 +81,7 @@ public class IHMImpl extends JFrame implements IHM {
 	    item.setAccelerator(ctrlXKeyStroke);
 		item.setBackground(Color.WHITE);
 		item.setIcon(new ImageIcon("image/exit.png"));
+		item.addActionListener(listener);
 		menu_file.add(item);
 		menu_file.setBackground(Color.WHITE);
 		menu.add(menu_file);
@@ -119,6 +121,10 @@ public class IHMImpl extends JFrame implements IHM {
 		
 		JMenu menu_about = new JMenu("About");
 		item = new JMenuItem("About");
+		item.addActionListener(listener);
+		item.setBackground(Color.WHITE);
+		menu_about.add(item);
+		item = new JMenuItem("Help");
 		item.addActionListener(listener);
 		item.setBackground(Color.WHITE);
 		menu_about.add(item);
@@ -194,5 +200,10 @@ public class IHMImpl extends JFrame implements IHM {
 	@Override
 	public void setCommandText(String text) {
 		action.setText(text);
+	}
+
+	@Override
+	public void close() {
+		dispose();
 	}
 }

@@ -3,12 +3,20 @@ package command;
 import invoker.IHM;
 import receiver.EditorEngine;
 
+/**
+ * Select <br/>
+ * implement Command<br/><br/>
+ * Command to select text
+ * @author Yann Jegu & Quentin Guillou
+ * @version 1.0
+ */
 public class Select implements Command {
 
 	private IHM ihm;
 	private EditorEngine engine;
 	
 	/**
+	 * Select() <br/>
 	 * Construct the Command Select
 	 * @param engine the engine which will receive the command
 	 */
@@ -18,6 +26,7 @@ public class Select implements Command {
 	}
 	
 	/**
+	 * Execute() <br/>
 	 * Execute the Select Command
 	 */
 	@Override
