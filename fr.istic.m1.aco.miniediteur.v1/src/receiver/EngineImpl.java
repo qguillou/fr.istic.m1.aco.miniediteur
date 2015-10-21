@@ -100,8 +100,8 @@ public class EngineImpl extends Subject implements EditorEngine  {
 	
 	@Override
 	/**
-	 * erase()
-	 * erase text into buffer
+	 * delete()
+	 * delete text into buffer
 	 */
 	public void delete() {
 		int start = selection.getStart();
@@ -159,30 +159,53 @@ public class EngineImpl extends Subject implements EditorEngine  {
 		return buffer.getText();
 	}
 	
-
+	/**
+	 * getSelectionStart() <br/>
+	 * get the selection start
+	 * @return int the start of cursor position
+	 */
 	@Override
 	public int getSelectionStart() {
 		return selection.getStart();
 	}
-
+	
+	/**
+	 * getSelectionEnd() <br/>
+	 * get the selection end
+	 * @return int the end of cursor position
+	 */
 	@Override
 	public int getSelectionLength() {
 		return selection.getLength();
 	}
-
+	
+	/**
+	 * notifyObserver() <br/>
+	 * notify all observer to update text area content
+	 */
 	@Override
 	public void notifyObservers() {
 		for (Observer observer : observers) {
 	         observer.notifyObserver();
 	      }
 	}
-
+	
+	/**
+	 * registerObserver() <br/>
+	 * add a observer in Collection
+	 * @param o: new Observer
+	 */
 	@Override
 	public void registerObserver(Observer o) {
 		o.registerSubject(this);
 		observers.add(o);
 	}
-
+	
+	/**
+	 * unregisterObserver() <br/>
+	 * delete a observer in Collection
+	 * @param o: new Observer
+	 */
 	@Override
 	public void unregisterObserver(Observer o) {
 		observers.remove(o);
