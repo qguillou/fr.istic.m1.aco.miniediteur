@@ -12,6 +12,13 @@ import javax.swing.JOptionPane;
 
 import command.Command;
 
+/**
+ * IHMListener <br/>
+ * Implements MouseListener, KeyListener, ActionListener
+ * The listener of IHM
+ * @author Yann Jegu & Quentin Guillou
+ * @version 1.0
+ */
 public class IHMListener implements MouseListener, KeyListener, ActionListener {
 		
 	private char lastChar;
@@ -21,18 +28,38 @@ public class IHMListener implements MouseListener, KeyListener, ActionListener {
 	
 	private IHM ihm;
 	
+	/**
+	 * setIHM() <br/>
+	 * Set the ihm which is listening
+	 * @param ihm: the ihm
+	 */
 	public void setIHM(IHM ihm){
 		this.ihm = ihm;
 	}
 	
+	/**
+	 * setCommand() <br/>
+	 * Set the commands 
+	 * @param commands: a map which contains all commands, the key is the name of command
+	 */
 	public void setCommand(Map<String, Command> commands) {
 		this.commands = commands;
 	}
-
+	
+	/**
+	 * getLastChar() <br/>
+	 * get the last char
+	 * @return char the last char typed
+	 */
 	public char getLastChar() {
 		return this.lastChar;
 	}
-
+	
+	/**
+	 * KeyPressed() <br/>
+	 * Listener on key pressed, call when key is pressed
+	 * @param e: the keyEvent
+	 */
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if ((e.getModifiers() & KeyEvent.CTRL_MASK) == 0) {
@@ -52,7 +79,12 @@ public class IHMListener implements MouseListener, KeyListener, ActionListener {
 			}
 		}	
 	}
-
+	
+	/**
+	 * KeyReleased() <br/>
+	 * Listener on key released, call when key is released
+	 * @param e: the keyEvent
+	 */
 	@Override
 	public void keyReleased(KeyEvent e) {
 		if ((e.getModifiers() & KeyEvent.CTRL_MASK) != 0) {
@@ -94,12 +126,22 @@ public class IHMListener implements MouseListener, KeyListener, ActionListener {
 			}
 		}
 	}
-
+	
+	/**
+	 * KeyTyped() <br/>
+	 * Listener on key typed, call when key is typed
+	 * @param e: the keyEvent
+	 */
 	@Override
 	public void keyTyped(KeyEvent e) {
 		
 	}
-
+	
+	/**
+	 * actionPerformed() <br/>
+	 * Listener on click on button or menu item 
+	 * @param e: the actionEvent
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		switch(e.getActionCommand()){
@@ -124,30 +166,32 @@ public class IHMListener implements MouseListener, KeyListener, ActionListener {
 		case "Exit":
 			ihm.close();
 			break;
-		case "Help":
-			ihm.getTextArea().help();
-			break;
 		}
 	}
-
+	
 	@Override
-	public void mouseClicked(MouseEvent arg0) {
+	public void mouseClicked(MouseEvent m) {
+	}
+	
+	@Override
+	public void mouseEntered(MouseEvent m) {
 	}
 
 	@Override
-	public void mouseEntered(MouseEvent arg0) {
+	public void mouseExited(MouseEvent m) {
 	}
 
 	@Override
-	public void mouseExited(MouseEvent arg0) {
+	public void mousePressed(MouseEvent m) {
 	}
-
+	
+	/**
+	 * mouseReleased() <br/>
+	 * Listener on mouse relased, call when mouse is released
+	 * @param m: the mouseEvent
+	 */
 	@Override
-	public void mousePressed(MouseEvent arg0) {
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent arg0) {
+	public void mouseReleased(MouseEvent m) {
 		commands.get("select").execute();
 	}
 }

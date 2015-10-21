@@ -21,13 +21,26 @@ import javax.swing.border.Border;
 
 
 @SuppressWarnings("serial")
+/**
+ * IHM <br/>
+ * The IG of application
+ * @author Yann Jegu & Quentin Guillou
+ * @version 1.0
+ */
 public class IHMImpl extends JFrame implements IHM {
-	
+	//the text area
 	private TextArea area;
 	private JLabel action;
 	
+	//the listener of this IHM
 	private IHMListener listener;
-
+	
+	/**
+	 * IHMImpl() <br/>
+	 * Constructor of IHM
+	 * Initialize attributs
+	 * @param listener
+	 */
 	public IHMImpl(IHMListener listener) {
 		super();
 		area =  new TextArea();
@@ -40,7 +53,12 @@ public class IHMImpl extends JFrame implements IHM {
 		
 		action = new JLabel(" ");
 	}
-
+	
+	/**
+	 * createView() <br/>
+	 * call methods to add the components of IG
+	 * show IG
+	 */
 	@Override
 	public void createView() {
 		setFrameOptions();
@@ -56,6 +74,13 @@ public class IHMImpl extends JFrame implements IHM {
 		area.requestFocus();
 	}
 	
+	/**
+	 * setFrameOptions() <br/>
+	 * configure the IG 
+	 * 		size of window
+	 * 		application icon
+	 * 		close operation
+	 */
 	@Override
 	public void setFrameOptions() {
 		setTitle("Editext");
@@ -68,7 +93,11 @@ public class IHMImpl extends JFrame implements IHM {
 		setSize(800, 500);
 		setLocationRelativeTo(null);
 	}
-
+	
+	/**
+	 * setMenu() <br/>
+	 * configure the menu
+	 */
 	@Override
 	public void setMenu() {
 		JMenuBar menu = new JMenuBar();
@@ -131,6 +160,10 @@ public class IHMImpl extends JFrame implements IHM {
 		menu.add(menu_about);
 	}
 	
+	/**
+	 * setToolbar() <br/>
+	 * configure the toolbar
+	 */
 	@Override
 	public void setToolbar() {
 		// Adding tool bar below the menu bar
@@ -177,7 +210,11 @@ public class IHMImpl extends JFrame implements IHM {
 	    paste.addActionListener(listener);
 	    erase.addActionListener(listener);
 	}
-
+	
+	/**
+	 * setContent() <br/>
+	 * configure the content
+	 */
 	@Override
 	public void setContent() {
 		add(area.getScrollArea(), BorderLayout.CENTER);
@@ -186,22 +223,39 @@ public class IHMImpl extends JFrame implements IHM {
 		action.setBorder(BorderFactory.createCompoundBorder(null,paddingBorder));
 		getContentPane().add(action, BorderLayout.SOUTH);
 	}
-
+	
+	/**
+	 * getTextArea() <br/>
+	 * @return TextArea the textarea
+	 */
 	@Override
 	public TextArea getTextArea() {
 		return area;
 	}
 	
+	/**
+	 * getListener() <br/>
+	 * @return IHMListener the listener of this ihm
+	 */
 	@Override
 	public IHMListener getListener() {
 		return listener;
 	}
 	
+	/**
+	 * setCommandText() <br/>
+	 * set the content of JLabel (on bottom of the window)
+	 * @param text the new JLabel content
+	 */
 	@Override
 	public void setCommandText(String text) {
 		action.setText(text);
 	}
-
+	
+	/**
+	 * close() <br/>
+	 * Method to close the window
+	 */
 	@Override
 	public void close() {
 		dispose();
