@@ -1,6 +1,7 @@
 package caretaker;
 
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -10,26 +11,31 @@ import originator.CommandRecordable;
 
 public class RecorderImpl implements Recorder {
 	
-	private Map<String, Memento> mementos;
+	private Collection<Pair> mementos;
+	private Map<String, CommandRecordable> commands;
 	private boolean recording;
 	
-	public RecorderImpl(){
-		mementos = new HashMap<String, Memento>();
+	public RecorderImpl(Map<String, CommandRecordable> commands){
+		mementos = new ArrayList<Pair>();
+		this.commands = commands;
 	}
 	
 	@Override
 	public void record(CommandRecordable c) {
 		if(recording) {
-			mementos.put(c.getName(), c.getMemento());
+			mementos.add(new Pair(c.getName(), c.getMemento()));
 		}
 	}
 
 	@Override
 	public void replay() {
-		Iterator<Memento> it = mementos.iterator();
+		Iterator<Pair> it = mementos.iterator();
+		Pair value;
 		
 		while(it.hasNext()) {
-			
+			value = it.next();
+			commands.get(value.name).setMemento(value.memento);
+			commands.get(value.name).execute();
 		}
 	}
 
@@ -42,5 +48,16 @@ public class RecorderImpl implements Recorder {
 	public void stopRecording() {
 		recording = false;
 	}
-
+	
+	
+	private class Pair {
+		
+		private String name;
+		private Memento memento;
+		
+		public Pair(String name, Memento memento){
+			this.name = name;
+			this.memento = memento;
+		}
+	}
 }
