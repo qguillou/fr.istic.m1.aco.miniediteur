@@ -18,7 +18,7 @@ public interface Observer {
 	/**
 	 * registerSubject() <br/>
 	 * set the subject
-	 * @param engineImpl the engine
+	 * @param engineImpl the engine 
 	 */
 	public void registerSubject(EditorEngine engineImpl);
 }
