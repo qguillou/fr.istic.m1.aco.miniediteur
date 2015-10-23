@@ -29,8 +29,8 @@ public class RecorderImpl implements Recorder {
 
 	@Override
 	public void replay() {
-		Iterator<Pair> it = mementos.iterator();
-		Pair value;
+		Iterator<Memento> it = mementos.iterator();
+		Memento value;
 		
 		while(it.hasNext()) {
 			value = it.next();
