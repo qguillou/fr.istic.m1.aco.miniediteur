@@ -9,6 +9,8 @@ public interface CommandRecordable extends Command {
 	
 	public void setMemento(Memento m);
 
-	public String getName();	
+	public String getName();
+
+	public void replay();	
 	
 }

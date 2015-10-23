@@ -7,7 +7,7 @@ package memento;
  */
 public interface Memento {
 	
-	public void setMemento();
+	public void setMemento(String state);
 	
-	public void getMemento();
+	public String getMemento();
 }

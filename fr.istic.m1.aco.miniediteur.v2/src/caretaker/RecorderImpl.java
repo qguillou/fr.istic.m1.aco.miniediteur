@@ -11,19 +11,19 @@ import originator.CommandRecordable;
 
 public class RecorderImpl implements Recorder {
 	
-	private Collection<Pair> mementos;
+	private Collection<Memento> mementos;
 	private Map<String, CommandRecordable> commands;
 	private boolean recording;
 	
 	public RecorderImpl(Map<String, CommandRecordable> commands){
-		mementos = new ArrayList<Pair>();
+		mementos = new ArrayList<Memento>();
 		this.commands = commands;
 	}
 	
 	@Override
 	public void record(CommandRecordable c) {
 		if(recording) {
-			mementos.add(new Pair(c.getName(), c.getMemento()));
+			mementos.add(new Memento(c.getName(), c.getMemento()));
 		}
 	}
 
@@ -35,7 +35,7 @@ public class RecorderImpl implements Recorder {
 		while(it.hasNext()) {
 			value = it.next();
 			commands.get(value.name).setMemento(value.memento);
-			commands.get(value.name).execute();
+			commands.get(value.name).replay();
 		}
 	}
 
@@ -47,17 +47,5 @@ public class RecorderImpl implements Recorder {
 	@Override
 	public void stopRecording() {
 		recording = false;
-	}
-	
-	
-	private class Pair {
-		
-		private String name;
-		private Memento memento;
-		
-		public Pair(String name, Memento memento){
-			this.name = name;
-			this.memento = memento;
-		}
 	}
 }

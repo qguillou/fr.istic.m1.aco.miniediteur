@@ -11,17 +11,24 @@ public class TypeRecordable extends Type implements CommandRecordable {
 
 	private Recorder recorder;
 	private String name;
+	private Memento memento;
 	
 	public TypeRecordable(EditorEngine engine, IHM ihm, Recorder recorder) {
 		super(engine, ihm);
 		this.recorder = recorder;
-		this.name = "copy";
+		this.name = "type";
 	}
 	
 	@Override
 	public void execute() {
 		super.execute();
 		recorder.record(this);
+	}
+	
+	@Override
+	public void replay() {
+		ihm.setCommandText(" ");
+		engine.type(memento.getMemento().charAt(0));
 	}
 	
 	@Override
@@ -32,13 +39,11 @@ public class TypeRecordable extends Type implements CommandRecordable {
 
 	@Override
 	public void setMemento(Memento m) {
-		// TODO Auto-generated method stub
-		
+		this.memento = m;
 	}
 
 	@Override
 	public String getName() {
 		return name;
 	}
-
 }

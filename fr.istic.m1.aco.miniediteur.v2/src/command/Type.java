@@ -12,8 +12,8 @@ import receiver.EditorEngine;
  */
 public class Type implements Command {
 	
-	private IHM ihm;
-	private EditorEngine engine;
+	protected IHM ihm;
+	protected EditorEngine engine;
 	
 	/**
 	 * Type() <br/>

@@ -2,15 +2,15 @@ package memento;
 
 public class MementoType implements Memento{
 	
+	private String state;
+	
 	@Override
-	public void setMemento() {
-		// TODO Auto-generated method stub
-		
+	public void setMemento(String state) {
+		this.state = state;
 	}
 
 	@Override
-	public void getMemento() {
-		// TODO Auto-generated method stub
-		
+	public String getMemento() {
+		return state;
 	}
 }
