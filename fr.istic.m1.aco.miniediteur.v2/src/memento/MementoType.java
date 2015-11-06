@@ -1,21 +1,16 @@
 package memento;
 
-public class MementoType implements Memento {
+public class MementoType implements Memento{
 	
-	private String text;
-	private String commandType = "type";
+	private String state;
 	
-	
-	public MementoType(String text) {
-		this.text = text;
+	@Override
+	public void setMemento(String state) {
+		this.state = state;
 	}
 
 	@Override
 	public String getMemento() {
-		return text;
-	}
-
-	public String getCommandType() {
-		return commandType;
+		return state;
 	}
 }

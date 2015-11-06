@@ -8,7 +8,9 @@ package memento;
  */
 public class MementoCopy implements Memento {
 	
-	public MementoCopy() {
+	@Override
+	public void setMemento() {
+		// TODO Auto-generated method stub
 		
 	}
 
