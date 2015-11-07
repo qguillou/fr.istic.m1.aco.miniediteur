@@ -8,6 +8,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Map;
 
+import javax.swing.JButton;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
@@ -178,18 +179,33 @@ public class IHMListener implements MouseListener, KeyListener, ActionListener {
 			commands.get("erase").execute();
 			break;
 		case "Record":
-			((JMenuItem) e.getSource()).setName("Stop record");
-			((JMenuItem) e.getSource()).setText("Stop record");
+			try {
+				((JMenuItem) e.getSource()).setName("Stop record");
+				((JMenuItem) e.getSource()).setText("Stop record");
+			}
+			catch(ClassCastException cce) {
+				((JButton) e.getSource()).setName("Stop record");
+				((JButton) e.getSource()).setText("Stop record");
+			}
 			recorder.setRecording();
 			ihm.getTextArea().requestFocus();
 			ihm.getTextArea().getCaret().setVisible(true);
 			break;
 		case "Stop record":
-			((JMenuItem) e.getSource()).setName("Record");
-			((JMenuItem) e.getSource()).setText("Record");
+			try {
+				((JMenuItem) e.getSource()).setName("Record");
+				((JMenuItem) e.getSource()).setText("Record");
+			}
+			catch(ClassCastException cce) {
+				((JButton) e.getSource()).setName("Record");
+				((JButton) e.getSource()).setText("Record");
+			}
 			recorder.setRecording();
 			ihm.getTextArea().requestFocus();
 			ihm.getTextArea().getCaret().setVisible(true);
+			break;
+		case "Replay":
+			commands.get("replay").execute();
 			break;
 		case "About":
 			JOptionPane.showMessageDialog(JOptionPane.getRootFrame(),

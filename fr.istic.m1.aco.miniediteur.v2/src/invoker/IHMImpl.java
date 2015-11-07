@@ -150,7 +150,14 @@ public class IHMImpl extends JFrame implements IHM {
 		//ctrlXKeyStroke = KeyStroke.getKeyStroke("");
 	    //item.setAccelerator(ctrlXKeyStroke);
 		item.setBackground(Color.WHITE);
-		//item.setIcon(new ImageIcon("image/erase.png"));
+		item.setIcon(new ImageIcon("image/record.png"));
+		item.addActionListener(listener);
+		menu_edit.add(item);
+		item = new JMenuItem("Replay");
+		ctrlXKeyStroke = KeyStroke.getKeyStroke("control R");
+	    item.setAccelerator(ctrlXKeyStroke);
+		item.setBackground(Color.WHITE);
+		item.setIcon(new ImageIcon("image/play.png"));
 		item.addActionListener(listener);
 		menu_edit.add(item);
 		menu_edit.setBackground(Color.WHITE);
@@ -183,6 +190,8 @@ public class IHMImpl extends JFrame implements IHM {
 		JButton copy = new JButton("Copy");
 		JButton paste = new JButton("Paste");
 		JButton erase = new JButton("Erase");
+		JButton record = new JButton("Record");
+		JButton replay = new JButton("Replay");
 		
 		// Adding buttons to the tool bar
 		tool.addSeparator(new Dimension(20, 0));
@@ -191,6 +200,9 @@ public class IHMImpl extends JFrame implements IHM {
 		tool.add(paste);		
 		tool.addSeparator(new Dimension(40, 0));
 		tool.add(erase);
+		tool.addSeparator(new Dimension(40, 0));
+		tool.add(record);
+		tool.add(replay);
 		
 		//Custom toolbar
 		tool.setFloatable(false);
@@ -198,11 +210,15 @@ public class IHMImpl extends JFrame implements IHM {
 		copy.setIcon(new ImageIcon("image/copy48.png"));
 		paste.setIcon(new ImageIcon("image/paste48.png"));
 		erase.setIcon(new ImageIcon("image/erase48.png"));
+		record.setIcon(new ImageIcon("image/record48.png"));
+		replay.setIcon(new ImageIcon("image/play48.png"));
 		
 		cut.setBackground(Color.WHITE);
 		copy.setBackground(Color.WHITE);
 		paste.setBackground(Color.WHITE);
 		erase.setBackground(Color.WHITE);
+		record.setBackground(Color.WHITE);
+		replay.setBackground(Color.WHITE);
 		
 		cut.setVerticalTextPosition(SwingConstants.BOTTOM);
 	    cut.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -212,11 +228,17 @@ public class IHMImpl extends JFrame implements IHM {
 	    paste.setHorizontalTextPosition(SwingConstants.CENTER);
 	    erase.setVerticalTextPosition(SwingConstants.BOTTOM);
 	    erase.setHorizontalTextPosition(SwingConstants.CENTER);
+	    record.setVerticalTextPosition(SwingConstants.BOTTOM);
+	    record.setHorizontalTextPosition(SwingConstants.CENTER);
+	    replay.setVerticalTextPosition(SwingConstants.BOTTOM);
+	    replay.setHorizontalTextPosition(SwingConstants.CENTER);
 	    
 	    cut.addActionListener(listener);
 	    copy.addActionListener(listener);
 	    paste.addActionListener(listener);
 	    erase.addActionListener(listener);
+	    record.addActionListener(listener);
+	    replay.addActionListener(listener);
 	}
 	
 	/**
