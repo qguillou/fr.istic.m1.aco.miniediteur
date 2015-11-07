@@ -29,4 +29,9 @@ public class PasteRecordable  extends Paste implements CommandRecordable {
 		}
 		super.execute();
 	}
+
+	@Override
+	public void restore(Memento m) {
+		engine.getClipboard().setText(m.getText());
+	}
 }

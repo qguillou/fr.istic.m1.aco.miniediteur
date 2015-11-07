@@ -8,6 +8,7 @@ package memento;
  */
 public class MementoPaste implements Memento {
 	
+	public static final String COMMAND = "Paste";
 	private String text;
 	
 	
@@ -16,8 +17,12 @@ public class MementoPaste implements Memento {
 	}
 	
 	@Override
-	public void create() {
-		// TODO Auto-generated method stub
-		
+	public String getText() {
+		return text;
+	}
+
+	@Override
+	public String getCommand() {
+		return COMMAND;
 	}	
 }

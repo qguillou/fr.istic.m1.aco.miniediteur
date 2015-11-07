@@ -7,5 +7,7 @@ package memento;
  */
 public interface Memento {
 	
-	public void create();
+	public String getText();
+	
+	public String getCommand();
 }
