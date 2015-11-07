@@ -13,7 +13,7 @@ import receiver.EditorEngine;
 public class Copy implements Command {
 
 	private IHM ihm;
-	private EditorEngine engine;
+	protected EditorEngine engine;
 	
 	/**
 	 * Copy() <br/>

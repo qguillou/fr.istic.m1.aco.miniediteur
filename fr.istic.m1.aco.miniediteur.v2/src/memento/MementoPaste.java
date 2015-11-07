@@ -6,18 +6,18 @@ package memento;
  * @author Yann Jegu & Quentin Guillou
  * @version 2.0
  */
-public class MementoCopy implements Memento {
+public class MementoPaste implements Memento {
+	
+	private String text;
+	
+	
+	public MementoPaste(String text) {
+		this.text = text;
+	}
 	
 	@Override
-	public void setMemento() {
+	public void create() {
 		// TODO Auto-generated method stub
 		
-	}
-
-	@Override
-	public void getMemento() {
-		// TODO Auto-generated method stub
-		
-	}
-
+	}	
 }

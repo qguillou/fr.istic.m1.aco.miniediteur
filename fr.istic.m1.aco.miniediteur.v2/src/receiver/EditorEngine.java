@@ -82,4 +82,8 @@ public interface EditorEngine {
 	 * @param o: new Observer
 	 */
 	public void registerObserver(Observer o);
+	
+	public ClipBoard getClipboard();
+	
+	public void setClipboard(String text);
 }

@@ -210,4 +210,15 @@ public class EngineImpl extends Subject implements EditorEngine  {
 	public void unregisterObserver(Observer o) {
 		observers.remove(o);
 	}
+
+	@Override
+	public ClipBoard getClipboard() {
+		return clipboard;
+	}
+
+	@Override
+	public void setClipboard(String text) {
+		// TODO Auto-generated method stub
+		
+	}
 }

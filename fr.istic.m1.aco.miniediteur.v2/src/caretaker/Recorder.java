@@ -12,4 +12,5 @@ public interface Recorder {
 	
 	public void stopRecording();
 	
+	public boolean getRecording();
 }
