@@ -9,6 +9,7 @@ import java.util.Map;
 
 import originator.CommandRecordable;
 import originator.PasteRecordable;
+import originator.TypeRecordable;
 import receiver.Buffer;
 import receiver.ClipBoard;
 import receiver.EditorEngine;
@@ -16,6 +17,7 @@ import receiver.EngineImpl;
 import receiver.Selection;
 import caretaker.Recorder;
 import caretaker.RecorderImpl;
+
 import command.Command;
 import command.Copy;
 import command.Cut;
@@ -23,7 +25,6 @@ import command.Delete;
 import command.Erase;
 import command.Replay;
 import command.Select;
-import command.Type;
 
 public class Editeur {
 
@@ -44,7 +45,7 @@ public class Editeur {
 		Command erase = new Erase(engine, ihm);
 		CommandRecordable paste = new PasteRecordable(engine, ihm, recorder);
 		Command select = new Select(engine, ihm);
-		Command type = new Type(engine, ihm);
+		CommandRecordable type = new TypeRecordable(engine, ihm, recorder);
 		Command delete = new Delete(engine, ihm);
 		Command replay = new Replay(engine, ihm, recorder);
 		
@@ -60,6 +61,7 @@ public class Editeur {
 		
 		Map<String, CommandRecordable> commandsRecordable = new HashMap<String, CommandRecordable>();
 		commandsRecordable.put("paste", paste);
+		commandsRecordable.put("type", type);
 				
 		listener.setCommand(commands);
 		recorder.setCommand(commandsRecordable);

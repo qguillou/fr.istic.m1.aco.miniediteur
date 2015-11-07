@@ -41,6 +41,8 @@ public class RecorderImpl implements Recorder {
 	@Override
 	public void setRecording() {
 		recording = !recording;
+		if(recording)
+			mementos = new ArrayList<Memento>();
 	}
 	
 	public boolean getRecording() {

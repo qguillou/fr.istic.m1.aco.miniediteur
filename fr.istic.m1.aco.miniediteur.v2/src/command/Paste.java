@@ -12,7 +12,7 @@ import receiver.EditorEngine;
  */
 public class Paste implements Command {
 
-	private IHM ihm;
+	protected IHM ihm;
 	protected EditorEngine engine;
 	
 	/**

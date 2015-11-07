@@ -23,7 +23,7 @@ import command.Command;
  */
 public class IHMListener implements MouseListener, KeyListener, ActionListener {
 		
-	private char lastChar;
+	private String lastChar;
 	
 	//Map which contains all command
 	private Map<String, Command> commands;
@@ -58,10 +58,18 @@ public class IHMListener implements MouseListener, KeyListener, ActionListener {
 	/**
 	 * getLastChar() <br/>
 	 * get the last char
-	 * @return char the last char typed
+	 * @return String the last char typed
 	 */
-	public char getLastChar() {
+	public String getLastChar() {
 		return this.lastChar;
+	}
+	/**
+	 * setLastChar() <br/>
+	 * set the last char
+	 * @param String the last char to typed
+	 */
+	public void setLastChar(String c) {
+		this.lastChar = c;
 	}
 	
 	/**
@@ -82,7 +90,7 @@ public class IHMListener implements MouseListener, KeyListener, ActionListener {
 			
 			default:
 				if(e.getKeyChar() != KeyEvent.CHAR_UNDEFINED){
-					lastChar = e.getKeyChar();
+					lastChar = ""+ e.getKeyChar();
 					commands.get("type").execute();
 				}				
 			}

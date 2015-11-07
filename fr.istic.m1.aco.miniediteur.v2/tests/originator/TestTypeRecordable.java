@@ -1,6 +1,6 @@
 package originator;
 
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 import invoker.IHM;
 import invoker.IHMImpl;
 import invoker.IHMListener;
@@ -20,7 +20,7 @@ import receiver.Selection;
 import caretaker.Recorder;
 import caretaker.RecorderImpl;
 
-public class TestPasteRecordable {
+public class TestTypeRecordable {
 	
 	private CommandRecordable command;
 	private EditorEngine engine;
@@ -38,9 +38,9 @@ public class TestPasteRecordable {
 		selection = new Selection();
 		engine = new EngineImpl(selection, clipboard, buffer);
 		recorder = new RecorderImpl();
-		command = new PasteRecordable(engine, ihm, recorder);
+		command = new TypeRecordable(engine, ihm, recorder);
 		Map<String, CommandRecordable> commands = new HashMap<String, CommandRecordable>();
-		commands.put("paste", command);
+		commands.put("type", command);
 		recorder.setCommand(commands);
 		
 		//Tests of initialization
@@ -64,4 +64,5 @@ public class TestPasteRecordable {
 	public void testRestore() {
 		fail("Not yet implemented");
 	}
+
 }

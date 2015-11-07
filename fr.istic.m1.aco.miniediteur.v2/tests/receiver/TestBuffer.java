@@ -69,16 +69,16 @@ public class TestBuffer {
 
 	@Test
 	public void testType() {
-		buffer.type('c', 0, 0);
+		buffer.type("c", 0, 0);
 		Assert.assertTrue("Type() - Text hasn't been typed", buffer.getText().equals("c"));
 		
-		buffer.type('a', 0, 1);
+		buffer.type("a", 0, 1);
 		Assert.assertTrue("Type() - Text hasn't been typed", buffer.getText().equals("a"));
 		
-		buffer.type('p', 0, 0);
+		buffer.type("p", 0, 0);
 		Assert.assertTrue("Type() - Text hasn't been typed", buffer.getText().equals("pa"));
 		
-		buffer.type('n', 2, 2);
+		buffer.type("n", 2, 2);
 		Assert.assertTrue("Type() - Text hasn't been typed", buffer.getText().equals("pan"));
 	}
 

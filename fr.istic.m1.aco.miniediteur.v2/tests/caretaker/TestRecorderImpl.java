@@ -1,6 +1,5 @@
 package caretaker;
 
-import static org.junit.Assert.fail;
 import invoker.IHM;
 import invoker.IHMImpl;
 import invoker.IHMListener;
@@ -12,8 +11,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import command.Command;
-import command.Replay;
 import originator.CommandRecordable;
 import originator.PasteRecordable;
 import receiver.Buffer;
@@ -21,6 +18,9 @@ import receiver.ClipBoard;
 import receiver.EditorEngine;
 import receiver.EngineImpl;
 import receiver.Selection;
+
+import command.Command;
+import command.Replay;
 
 public class TestRecorderImpl {
 	
@@ -44,7 +44,7 @@ public class TestRecorderImpl {
 	
 	@Test
 	public void testRecord() {
-		fail("Not yet implemented");
+		
 	}
 
 	@Test
@@ -59,5 +59,10 @@ public class TestRecorderImpl {
 		recorder.setRecording();
 		commands.get("replay").execute();
 		Assert.assertTrue("TestReplay() - Paste doesn't been execute", engine.getText().equals("Mon texteMon texte"));
+		commands.get("replay").execute();
+		Assert.assertTrue("TestReplay() - Paste doesn't been execute", engine.getText().equals("Mon texteMon texteMon texte"));
+		recorder.setRecording();
+		commands.get("replay").execute();
+		Assert.assertTrue("TestReplay() - Paste doesn't been execute", engine.getText().equals("Mon texteMon texteMon texte"));
 	}
 }

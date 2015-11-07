@@ -175,13 +175,13 @@ public class TestEngineImpl {
 
 	@Test
 	public void testType() {
-		engine.type('c');
+		engine.type("c");
 		Assert.assertTrue("Type() - Buffer isn't empty", buffer.getText().equals("c"));
 		Assert.assertTrue("Type() - Selection isn't (0, 0)", selection.getStart() == 1 && selection.getLength() == 0);
 		
 		selection.setStart(0);
 		selection.setLength(1);
-		engine.type('a');
+		engine.type("a");
 		Assert.assertTrue("Type() - Buffer content isn't the set text", buffer.getText().equals("a"));
 		Assert.assertTrue("Type() - Selection isn't (0, 0)", selection.getStart() == 1 && selection.getLength() == 0);
 	}

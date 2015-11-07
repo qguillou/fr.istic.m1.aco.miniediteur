@@ -44,7 +44,7 @@ public interface EditorEngine {
 	 * type text into buffer
 	 * @param c: the last char typed
 	 */
-	public void type(char c) throws NumberFormatException;
+	public void type(String c) throws NumberFormatException;
 	
 	/**
 	 * select()

@@ -110,7 +110,7 @@ public class EngineImpl implements EditorEngine  {
 	 * type text into buffer
 	 * @param c: the last char typed
 	 */
-	public void type(char c) {
+	public void type(String c) {
 		int start = selection.getStart();
 		int end = start + selection.getLength();
 		
