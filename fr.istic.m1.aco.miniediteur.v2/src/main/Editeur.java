@@ -1,24 +1,29 @@
 package main;
 
+import invoker.IHM;
+import invoker.IHMImpl;
+import invoker.IHMListener;
+
 import java.util.HashMap;
 import java.util.Map;
 
-import command.Command;
-import command.Copy;
-import command.Cut;
-import command.Delete;
-import command.Erase;
-import command.Paste;
-import command.Select;
-import command.Type;
-import invoker.IHM;
-import invoker.IHMListener;
-import invoker.IHMImpl;
+import originator.CommandRecordable;
+import originator.PasteRecordable;
 import receiver.Buffer;
 import receiver.ClipBoard;
 import receiver.EditorEngine;
 import receiver.EngineImpl;
 import receiver.Selection;
+import caretaker.Recorder;
+import caretaker.RecorderImpl;
+import command.Command;
+import command.Copy;
+import command.Cut;
+import command.Delete;
+import command.Erase;
+import command.Replay;
+import command.Select;
+import command.Type;
 
 public class Editeur {
 
@@ -31,13 +36,17 @@ public class Editeur {
 		Buffer buffer = new Buffer();		
 		EditorEngine engine = new EngineImpl(selection, clipboard, buffer);
 		
+		Recorder recorder = new RecorderImpl();
+		listener.setRecorder(recorder);
+		
 		Command copy = new Copy(engine, ihm);
 		Command cut = new Cut(engine, ihm);
 		Command erase = new Erase(engine, ihm);
-		Command paste = new Paste(engine, ihm);
+		CommandRecordable paste = new PasteRecordable(engine, ihm, recorder);
 		Command select = new Select(engine, ihm);
 		Command type = new Type(engine, ihm);
 		Command delete = new Delete(engine, ihm);
+		Command replay = new Replay(engine, ihm, recorder);
 		
 		Map<String, Command> commands = new HashMap<String, Command>();
 		commands.put("copy", copy);
@@ -47,8 +56,13 @@ public class Editeur {
 		commands.put("select", select);
 		commands.put("type", type);
 		commands.put("delete", delete);
+		commands.put("replay", replay);
 		
+		Map<String, CommandRecordable> commandsRecordable = new HashMap<String, CommandRecordable>();
+		commandsRecordable.put("paste", paste);
+				
 		listener.setCommand(commands);
+		recorder.setCommand(commandsRecordable);
 		
 		ihm.createView();
 	}

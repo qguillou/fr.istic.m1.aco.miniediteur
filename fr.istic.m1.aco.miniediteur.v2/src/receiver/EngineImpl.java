@@ -1,7 +1,5 @@
 package receiver;
 
-import java.util.ArrayList;
-
 /**
  * EngineImpl
  * Execute commands on buffer, clipboard and selection

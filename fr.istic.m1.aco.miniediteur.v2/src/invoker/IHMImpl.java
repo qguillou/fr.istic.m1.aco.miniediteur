@@ -145,6 +145,14 @@ public class IHMImpl extends JFrame implements IHM {
 		item.setIcon(new ImageIcon("image/erase.png"));
 		item.addActionListener(listener);
 		menu_edit.add(item);
+		menu_edit.addSeparator();
+		item = new JMenuItem("Record");
+		//ctrlXKeyStroke = KeyStroke.getKeyStroke("");
+	    //item.setAccelerator(ctrlXKeyStroke);
+		item.setBackground(Color.WHITE);
+		//item.setIcon(new ImageIcon("image/erase.png"));
+		item.addActionListener(listener);
+		menu_edit.add(item);
 		menu_edit.setBackground(Color.WHITE);
 		menu.add(menu_edit);
 		

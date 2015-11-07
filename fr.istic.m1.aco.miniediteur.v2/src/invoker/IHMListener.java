@@ -8,8 +8,10 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Map;
 
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
+import caretaker.Recorder;
 import command.Command;
 
 /**
@@ -26,7 +28,14 @@ public class IHMListener implements MouseListener, KeyListener, ActionListener {
 	//Map which contains all command
 	private Map<String, Command> commands;
 	
+	private Recorder recorder;
+	
 	private IHM ihm;
+	
+	
+	public void setRecorder(Recorder r) {
+		recorder = r;
+	}
 	
 	/**
 	 * setIHM() <br/>
@@ -98,6 +107,9 @@ public class IHMListener implements MouseListener, KeyListener, ActionListener {
 			case KeyEvent.VK_X:
 				commands.get("cut").execute();
 				break;
+			case KeyEvent.VK_R:
+				commands.get("replay").execute();
+				break;
 			case KeyEvent.VK_A:
 			case KeyEvent.VK_LEFT:
 			case KeyEvent.VK_RIGHT:
@@ -122,7 +134,7 @@ public class IHMListener implements MouseListener, KeyListener, ActionListener {
 			case KeyEvent.VK_END:
 			case KeyEvent.VK_HOME:
 				commands.get("select").execute();
-				break;				
+				break;
 			}
 		}
 	}
@@ -157,9 +169,23 @@ public class IHMListener implements MouseListener, KeyListener, ActionListener {
 		case "Erase":
 			commands.get("erase").execute();
 			break;
+		case "Record":
+			((JMenuItem) e.getSource()).setName("Stop record");
+			((JMenuItem) e.getSource()).setText("Stop record");
+			recorder.setRecording();
+			ihm.getTextArea().requestFocus();
+			ihm.getTextArea().getCaret().setVisible(true);
+			break;
+		case "Stop record":
+			((JMenuItem) e.getSource()).setName("Record");
+			((JMenuItem) e.getSource()).setText("Record");
+			recorder.setRecording();
+			ihm.getTextArea().requestFocus();
+			ihm.getTextArea().getCaret().setVisible(true);
+			break;
 		case "About":
 			JOptionPane.showMessageDialog(JOptionPane.getRootFrame(),
-				    "ACO Project\nDeveloped by Yann JEGU & Quentin GUILLOU\nVersion 1.0 October, 2015",
+				    "ACO Project\nDeveloped by Yann JEGU & Quentin GUILLOU\nVersion 2.0 October, 2015",
 				    "About Editext",
 				    JOptionPane.PLAIN_MESSAGE);
 			break;

@@ -1,5 +1,6 @@
 package caretaker;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
@@ -13,8 +14,9 @@ public class RecorderImpl implements Recorder {
 	private Collection<Memento> mementos;
 	private boolean recording;
 	
-	public RecorderImpl(Map<String, CommandRecordable> commands){
-		this.commands = commands;
+	public RecorderImpl() {
+		mementos = new ArrayList<Memento>();
+		recording = false;
 	}
 	
 	@Override
@@ -29,6 +31,7 @@ public class RecorderImpl implements Recorder {
 		Memento m;
 		
 		while(it.hasNext()) {
+			
 			m = it.next();			
 			commands.get(m.getCommand()).restore(m);
 			commands.get(m.getCommand()).execute();
@@ -36,16 +39,16 @@ public class RecorderImpl implements Recorder {
 	}
 
 	@Override
-	public void startRecording() {
-		recording = true;
-	}
-
-	@Override
-	public void stopRecording() {
-		recording = false;
+	public void setRecording() {
+		recording = !recording;
 	}
 	
 	public boolean getRecording() {
 		return recording;
+	}
+
+	@Override
+	public void setCommand(Map<String, CommandRecordable> commands) {
+		this.commands = commands;
 	}
 }

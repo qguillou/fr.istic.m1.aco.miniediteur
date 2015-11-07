@@ -8,7 +8,7 @@ package memento;
  */
 public class MementoPaste implements Memento {
 	
-	public static final String COMMAND = "Paste";
+	public static final String COMMAND = "paste";
 	private String text;
 	
 	
