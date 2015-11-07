@@ -6,7 +6,6 @@ import java.awt.Insets;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
-import observer.Observer;
 import receiver.EditorEngine;
 
 @SuppressWarnings("serial")
@@ -18,7 +17,7 @@ import receiver.EditorEngine;
  * @author Yann Jegu & Quentin Guillou
  * @version 1.0
  */
-public class TextArea extends JTextArea implements Observer {
+public class TextArea extends JTextArea {
 	
 	protected EditorEngine subject;
 	
@@ -57,24 +56,5 @@ public class TextArea extends JTextArea implements Observer {
 		setSelectionEnd(end);
 		getCaret().setVisible(true);
 		requestFocusInWindow();
-	}
-
-	/**
-	 * notifyObserver() <br/>
-	 * methode call by the subject when we need to update text area content
-	 */
-	@Override
-	public void notifyObserver() {
-		update(subject.getText(), subject.getSelectionStart(), subject.getSelectionLength() + subject.getSelectionStart());
-	}
-	
-	/**
-	 * registerSubject() <br/>
-	 * set the subject
-	 * @param engineImpl the engine
-	 */
-	@Override
-	public void registerSubject(EditorEngine engineImpl) {
-		subject = engineImpl;
 	}
 }

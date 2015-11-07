@@ -34,5 +34,6 @@ public class Copy implements Command {
 	public void execute() {
 		ihm.setCommandText("Ctrl + C");
 		engine.copy();
+		ihm.getTextArea().update(engine.getText(), engine.getSelectionStart(), engine.getSelectionStart()+engine.getSelectionLength());
 	}
 }

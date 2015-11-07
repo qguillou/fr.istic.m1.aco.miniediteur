@@ -33,5 +33,6 @@ public class Erase implements Command {
 	public void execute() {
 		ihm.setCommandText("BACK SPACE");
 		engine.erase();
+		ihm.getTextArea().update(engine.getText(), engine.getSelectionStart(), engine.getSelectionStart()+engine.getSelectionLength());
 	}
 }

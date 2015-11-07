@@ -37,6 +37,7 @@ public class Replay implements Command  {
 	@Override
 	public void execute() {
 		recorder.replay();
+		ihm.getTextArea().update(engine.getText(), engine.getSelectionStart(), engine.getSelectionStart()+engine.getSelectionLength());
 	}
 
 }

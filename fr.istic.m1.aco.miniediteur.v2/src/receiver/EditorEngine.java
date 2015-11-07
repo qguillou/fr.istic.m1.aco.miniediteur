@@ -1,6 +1,5 @@
 package receiver;
 
-import observer.Observer;
 
 /**
  * EditorEngine - Interface
@@ -75,14 +74,7 @@ public interface EditorEngine {
 	 * @return int the end of cursor position
 	 */
 	public int getSelectionLength();
-	
-	/**
-	 * registerObserver() <br/>
-	 * add a observer in Collection
-	 * @param o: new Observer
-	 */
-	public void registerObserver(Observer o);
-	
+		
 	public ClipBoard getClipboard();
 	
 	public void setClipboard(String text);

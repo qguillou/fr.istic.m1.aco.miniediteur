@@ -34,5 +34,6 @@ public class Select implements Command {
 		int start = ihm.getTextArea().getSelectionStart();
 		int length = ihm.getTextArea().getSelectionEnd() - start;
 		engine.select(start, length);
+		ihm.getTextArea().update(engine.getText(), engine.getSelectionStart(), engine.getSelectionStart()+engine.getSelectionLength());
 	}
 }
