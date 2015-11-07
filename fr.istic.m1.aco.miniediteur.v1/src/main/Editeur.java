@@ -30,7 +30,6 @@ public class Editeur {
 		Selection selection = new Selection();
 		Buffer buffer = new Buffer();		
 		EditorEngine engine = new EngineImpl(selection, clipboard, buffer);
-		engine.registerObserver(ihm.getTextArea());
 		
 		Command copy = new Copy(engine, ihm);
 		Command cut = new Cut(engine, ihm);

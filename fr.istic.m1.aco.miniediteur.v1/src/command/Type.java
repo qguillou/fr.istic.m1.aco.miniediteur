@@ -33,5 +33,6 @@ public class Type implements Command {
 	public void execute() {
 		ihm.setCommandText(" ");
 		engine.type(ihm.getListener().getLastChar());
+		ihm.getTextArea().update(engine.getText(), engine.getSelectionStart(), engine.getSelectionStart()+engine.getSelectionLength());
 	}
 }

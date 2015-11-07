@@ -33,5 +33,6 @@ public class Delete implements Command {
 	public void execute() {
 		ihm.setCommandText("DELETE");
 		engine.delete();
+		ihm.getTextArea().update(engine.getText(), engine.getSelectionStart(), engine.getSelectionStart()+engine.getSelectionLength());
 	}
 }

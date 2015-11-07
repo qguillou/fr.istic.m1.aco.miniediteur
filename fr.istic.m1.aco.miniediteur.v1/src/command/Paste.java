@@ -33,5 +33,6 @@ public class Paste implements Command {
 	public void execute() {
 		ihm.setCommandText("Ctrl + V");
 		engine.paste();
+		ihm.getTextArea().update(engine.getText(), engine.getSelectionStart(), engine.getSelectionStart()+engine.getSelectionLength());
 	}
 }

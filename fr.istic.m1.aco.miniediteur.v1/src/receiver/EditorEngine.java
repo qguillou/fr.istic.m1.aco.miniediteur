@@ -1,6 +1,5 @@
 package receiver;
 
-import observer.Observer;
 
 /**
  * EditorEngine - Interface
@@ -76,10 +75,4 @@ public interface EditorEngine {
 	 */
 	public int getSelectionLength();
 	
-	/**
-	 * registerObserver() <br/>
-	 * add a observer in Collection
-	 * @param o: new Observer
-	 */
-	public void registerObserver(Observer o);
 }

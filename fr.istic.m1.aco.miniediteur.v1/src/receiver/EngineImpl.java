@@ -1,9 +1,5 @@
 package receiver;
 
-import java.util.ArrayList;
-
-import observer.Observer;
-import observer.Subject;
 
 /**
  * EngineImpl
@@ -11,7 +7,7 @@ import observer.Subject;
  * @author Yann Jegu & Quentin Guillou
  * @version 1.0
  */
-public class EngineImpl extends Subject implements EditorEngine  {
+public class EngineImpl implements EditorEngine  {
 	private Selection selection;	
 	private ClipBoard clipboard;	
 	private Buffer buffer;
@@ -26,8 +22,6 @@ public class EngineImpl extends Subject implements EditorEngine  {
 		this.selection = selection;
 		this.clipboard = clipboard;
 		this.buffer = buffer;
-		
-		this.observers = new ArrayList<Observer>();
 	}
 	
 	@Override
@@ -42,7 +36,6 @@ public class EngineImpl extends Subject implements EditorEngine  {
 			String text = buffer.copy(start, end);
 			clipboard.setText(text);
 		}
-		notifyObservers();
 	}
 
 	@Override
@@ -58,8 +51,6 @@ public class EngineImpl extends Subject implements EditorEngine  {
 		buffer.paste(text, start, end);
 		selection.setLength(0);
 		selection.setStart(start + text.length());
-		
-		notifyObservers();
 	}
 
 	@Override
@@ -74,8 +65,7 @@ public class EngineImpl extends Subject implements EditorEngine  {
 			String text = buffer.cut(start, end);
 			selection.setLength(0);
 			clipboard.setText(text);
-		}		
-		notifyObservers();
+		}
 	}
 
 	@Override
@@ -94,8 +84,6 @@ public class EngineImpl extends Subject implements EditorEngine  {
 			selection.setLength(0);
 			selection.setStart(start);
 		}
-		
-		notifyObservers();
 	}
 	
 	@Override
@@ -114,8 +102,6 @@ public class EngineImpl extends Subject implements EditorEngine  {
 			selection.setLength(0);
 			selection.setStart(start);
 		}
-		
-		notifyObservers();
 	}
 
 	@Override
@@ -131,8 +117,6 @@ public class EngineImpl extends Subject implements EditorEngine  {
 		buffer.type(c, start, end);
 		selection.setStart(start + 1);
 		selection.setLength(0);
-		
-		notifyObservers();
 	}
 	
 	@Override
@@ -145,8 +129,6 @@ public class EngineImpl extends Subject implements EditorEngine  {
 	public void select(int start, int length) throws NumberFormatException {
 		selection.setStart(start);
 		selection.setLength(length);
-		
-		notifyObservers();
 	}
 
 	@Override
@@ -177,37 +159,5 @@ public class EngineImpl extends Subject implements EditorEngine  {
 	@Override
 	public int getSelectionLength() {
 		return selection.getLength();
-	}
-	
-	/**
-	 * notifyObserver() <br/>
-	 * notify all observer to update text area content
-	 */
-	@Override
-	public void notifyObservers() {
-		for (Observer observer : observers) {
-	         observer.notifyObserver();
-	      }
-	}
-	
-	/**
-	 * registerObserver() <br/>
-	 * add a observer in Collection
-	 * @param o: new Observer
-	 */
-	@Override
-	public void registerObserver(Observer o) {
-		o.registerSubject(this);
-		observers.add(o);
-	}
-	
-	/**
-	 * unregisterObserver() <br/>
-	 * delete a observer in Collection
-	 * @param o: new Observer
-	 */
-	@Override
-	public void unregisterObserver(Observer o) {
-		observers.remove(o);
 	}
 }

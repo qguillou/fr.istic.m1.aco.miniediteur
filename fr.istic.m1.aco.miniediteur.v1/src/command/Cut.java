@@ -34,5 +34,6 @@ public class Cut implements Command {
 	public void execute() {
 		ihm.setCommandText("Ctrl + X");
 		engine.cut();
+		ihm.getTextArea().update(engine.getText(), engine.getSelectionStart(), engine.getSelectionStart()+engine.getSelectionLength());
 	}
 }
