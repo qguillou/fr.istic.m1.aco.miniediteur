@@ -30,8 +30,7 @@ public class RecorderImpl implements Recorder {
 		Iterator<Memento> it = mementos.iterator();
 		Memento m;
 		
-		while(it.hasNext()) {
-			
+		while(it.hasNext()) {			
 			m = it.next();			
 			commands.get(m.getCommand()).restore(m);
 			commands.get(m.getCommand()).execute();
