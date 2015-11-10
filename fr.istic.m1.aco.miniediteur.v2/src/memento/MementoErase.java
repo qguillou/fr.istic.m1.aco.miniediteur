@@ -16,13 +16,23 @@ public class MementoErase implements Memento {
 		this.text = text;
 	}
 	
+	/**
+	 * getText()<br/>
+	 * return the text saved
+	 * @return String the saved text
+	 */
 	@Override
 	public String getText() {
 		return text;
 	}
-
+	
+	/**
+	 * getCommand()<br/>
+	 * return the command saved
+	 * @return String the saved command
+	 */
 	@Override
 	public String getCommand() {
 		return COMMAND;
-	}	
+	}
 }

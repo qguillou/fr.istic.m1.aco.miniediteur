@@ -74,8 +74,11 @@ public interface EditorEngine {
 	 * @return int the end of cursor position
 	 */
 	public int getSelectionLength();
-		
-	public ClipBoard getClipboard();
 	
-	public void setClipboard(String text);
+	/**
+	 * getClipboard() <br/>
+	 * get the clipboard
+	 * @return Clipboard: the clipboard
+	 */
+	public ClipBoard getClipboard();
 }

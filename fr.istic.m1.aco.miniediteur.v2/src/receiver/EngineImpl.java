@@ -160,15 +160,14 @@ public class EngineImpl implements EditorEngine  {
 	public int getSelectionLength() {
 		return selection.getLength();
 	}
-
+	
+	/**
+	 * getClipboard() <br/>
+	 * get the clipboard
+	 * @return Clipboard: the clipboard
+	 */
 	@Override
 	public ClipBoard getClipboard() {
 		return clipboard;
-	}
-
-	@Override
-	public void setClipboard(String text) {
-		// TODO Auto-generated method stub
-		
 	}
 }
