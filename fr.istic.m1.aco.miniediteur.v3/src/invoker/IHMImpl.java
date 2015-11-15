@@ -160,6 +160,21 @@ public class IHMImpl extends JFrame implements IHM {
 		item.setIcon(new ImageIcon("image/play.png"));
 		item.addActionListener(listener);
 		menu_edit.add(item);
+		menu_edit.addSeparator();
+		item = new JMenuItem("Undo");
+		ctrlXKeyStroke = KeyStroke.getKeyStroke("control Z");
+	    item.setAccelerator(ctrlXKeyStroke);
+		item.setBackground(Color.WHITE);
+		//item.setIcon(new ImageIcon("image/play.png"));
+		item.addActionListener(listener);
+		menu_edit.add(item);
+		item = new JMenuItem("Redo");
+		ctrlXKeyStroke = KeyStroke.getKeyStroke("control Y");
+	    item.setAccelerator(ctrlXKeyStroke);
+		item.setBackground(Color.WHITE);
+		//item.setIcon(new ImageIcon("image/play.png"));
+		item.addActionListener(listener);
+		menu_edit.add(item);
 		menu_edit.setBackground(Color.WHITE);
 		menu.add(menu_edit);
 		

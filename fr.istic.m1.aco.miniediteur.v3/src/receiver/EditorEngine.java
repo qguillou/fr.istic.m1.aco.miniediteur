@@ -81,4 +81,8 @@ public interface EditorEngine {
 	 * @return Clipboard: the clipboard
 	 */
 	public ClipBoard getClipboard();
+	
+	public EditorEngine getState();
+
+	public void setState(EditorEngine e);
 }

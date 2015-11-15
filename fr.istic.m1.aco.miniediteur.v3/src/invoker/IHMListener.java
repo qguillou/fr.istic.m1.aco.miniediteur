@@ -95,7 +95,17 @@ public class IHMListener implements MouseListener, KeyListener, ActionListener {
 					commands.get("type").execute();
 				}				
 			}
-		}	
+		}
+		else {
+			switch(e.getKeyCode()) {
+			case KeyEvent.VK_Z:
+				//commands.get("undo").execute();
+				break;
+			case KeyEvent.VK_Y:
+				//commands.get("redo").execute();
+				break;
+			}
+		}
 	}
 	
 	/**
@@ -207,9 +217,15 @@ public class IHMListener implements MouseListener, KeyListener, ActionListener {
 		case "Replay":
 			commands.get("replay").execute();
 			break;
+		case "Undo":
+			commands.get("undo").execute();
+			break;
+		case "Redo":
+			commands.get("redo").execute();
+			break;
 		case "About":
 			JOptionPane.showMessageDialog(JOptionPane.getRootFrame(),
-				    "ACO Project\nDeveloped by Yann JEGU & Quentin GUILLOU\nVersion 2.0 October, 2015",
+				    "ACO Project\nDeveloped by Yann JEGU & Quentin GUILLOU\nVersion 3.0 November, 2015",
 				    "About Editext",
 				    JOptionPane.PLAIN_MESSAGE);
 			break;

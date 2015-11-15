@@ -3,6 +3,7 @@ package originator;
 import caretaker.Recorder;
 import invoker.IHM;
 import receiver.EditorEngine;
+import receiver.RecorderEngine;
 import command.Paste;
 import memento.Memento;
 import memento.MementoPaste;
@@ -22,9 +23,10 @@ public class PasteRecordable  extends Paste implements CommandRecordable {
 	 * @param engine: the editor engine
 	 * @param ihm: the ihm
 	 * @param recorder: the recorder 
+	 * @param recorderState: the engine recorder
 	 */
-	public PasteRecordable(EditorEngine engine, IHM ihm, Recorder recorder) {
-		super(engine, ihm);
+	public PasteRecordable(EditorEngine engine, IHM ihm, Recorder recorder, RecorderEngine recorderState) {
+		super(engine, ihm, recorderState);
 		this.recorder = recorder;
 	}
 	
@@ -52,11 +54,12 @@ public class PasteRecordable  extends Paste implements CommandRecordable {
 	}
 	
 	/**
-	 * restore()<br/>
-	 * restore the states (command executed and text)
+	 * replay()<br/>
+	 * replay the command with the states (command executed and text)
 	 */
 	@Override
-	public void restore(Memento m) {
+	public void replay(Memento m) {
 		engine.getClipboard().setText(m.getText());
+		super.execute();
 	}
 }

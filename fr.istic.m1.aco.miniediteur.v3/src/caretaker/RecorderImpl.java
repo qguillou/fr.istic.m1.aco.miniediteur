@@ -50,8 +50,7 @@ public class RecorderImpl implements Recorder {
 		
 		while(it.hasNext()) {			
 			m = it.next();			
-			commands.get(m.getCommand()).restore(m);
-			commands.get(m.getCommand()).execute();
+			commands.get(m.getCommand()).replay(m);
 		}
 	}
 	

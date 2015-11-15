@@ -52,11 +52,12 @@ public class EraseRecordable  extends Erase implements CommandRecordable {
 	}
 	
 	/**
-	 * restore()<br/>
-	 * restore the states (command executed and text)
+	 * replay()<br/>
+	 * replay the command with the states (command executed and text)
 	 */
 	@Override
-	public void restore(Memento m) {
+	public void replay(Memento m) {
 		engine.getClipboard().setText(m.getText());
+		super.execute();
 	}
 }

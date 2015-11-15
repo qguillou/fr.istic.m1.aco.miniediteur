@@ -1,7 +1,9 @@
 package command;
 
+import memento.MementoEngine;
 import invoker.IHM;
 import receiver.EditorEngine;
+import receiver.RecorderEngine;
 
 /**
  * Type<br/>
@@ -14,15 +16,17 @@ public class Type implements Command {
 	
 	protected IHM ihm;
 	protected EditorEngine engine;
+	private RecorderEngine recorder;
 	
 	/**
 	 * Type() <br/>
 	 * Construct the Command Type
 	 * @param engine the engine which will receive the command
 	 */
-	public Type(EditorEngine engine, IHM ihm) {
+	public Type(EditorEngine engine, IHM ihm, RecorderEngine recorderState) {
 		this.engine = engine;
 		this.ihm = ihm;
+		this.recorder = recorderState;
 	}
 	
 	/**
@@ -34,5 +38,8 @@ public class Type implements Command {
 		ihm.setCommandText(" ");
 		engine.type(ihm.getListener().getLastChar());
 		ihm.getTextArea().update(engine.getText(), engine.getSelectionStart(), engine.getSelectionStart()+engine.getSelectionLength());
+	
+		MementoEngine m = new MementoEngine(engine.getState());
+		recorder.save(m);
 	}
 }

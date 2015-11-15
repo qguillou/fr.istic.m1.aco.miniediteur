@@ -170,4 +170,30 @@ public class EngineImpl implements EditorEngine  {
 	public ClipBoard getClipboard() {
 		return clipboard;
 	}
+
+	@Override
+	public EditorEngine getState() {
+		Selection selection = new Selection();
+		selection.setLength(this.selection.getLength());
+		selection.setStart(this.selection.getStart());
+		
+		ClipBoard clipboard = new ClipBoard();
+		clipboard.setText(this.clipboard.getText());
+		
+		Buffer buffer = new Buffer();
+		buffer.setText(this.buffer.getText());
+		
+		EditorEngine engine = new EngineImpl(selection, clipboard, buffer);
+		return engine;
+	}
+
+	@Override
+	public void setState(EditorEngine e) {
+		this.selection.setStart(e.getSelectionStart());
+		this.selection.setLength(e.getSelectionLength());
+		
+		this.clipboard.setText(e.getClipboard().getText());
+		
+		this.buffer.setText(e.getText());
+	}
 }

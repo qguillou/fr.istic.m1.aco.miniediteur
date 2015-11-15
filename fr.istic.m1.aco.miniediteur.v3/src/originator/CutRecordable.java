@@ -6,25 +6,25 @@ import memento.MementoDelete;
 import receiver.EditorEngine;
 import caretaker.Recorder;
 
-import command.Delete;
+import command.Cut;
 
 /**
- * DeleteRecordable
+ * CutRecordable
  * @author Yann Jegu & Quentin Guillou
  * @version 2.0
  */
-public class DeleteRecordable  extends Delete implements CommandRecordable {
+public class CutRecordable  extends Cut implements CommandRecordable {
 	
 	private Recorder recorder;
 	
 	/**
-	 * DeleteRecordable() - Constructor<br/>
+	 * CutRecordable() - Constructor<br/>
 	 * initialize
 	 * @param engine: the editor engine
 	 * @param ihm: the ihm
 	 * @param recorder: the recorder 
 	 */
-	public DeleteRecordable(EditorEngine engine, IHM ihm, Recorder recorder) {
+	public CutRecordable(EditorEngine engine, IHM ihm, Recorder recorder) {
 		super(engine, ihm);
 		this.recorder = recorder;
 	}
@@ -46,10 +46,10 @@ public class DeleteRecordable  extends Delete implements CommandRecordable {
 	 * Execute a command, but save the command if it's necessary
 	 */
 	public void execute(){
+		super.execute();
 		if(recorder.getRecording()){
 			recorder.record(this);
 		}
-		super.execute();
 	}
 	
 	/**
@@ -59,6 +59,5 @@ public class DeleteRecordable  extends Delete implements CommandRecordable {
 	@Override
 	public void replay(Memento m) {
 		engine.getClipboard().setText(m.getText());
-		super.execute();
 	}
 }

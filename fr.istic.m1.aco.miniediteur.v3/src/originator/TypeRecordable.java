@@ -4,8 +4,8 @@ import invoker.IHM;
 import memento.Memento;
 import memento.MementoType;
 import receiver.EditorEngine;
+import receiver.RecorderEngine;
 import caretaker.Recorder;
-
 import command.Type;
 
 /**
@@ -23,9 +23,10 @@ public class TypeRecordable  extends Type implements CommandRecordable {
 	 * @param engine: the editor engine
 	 * @param ihm: the ihm
 	 * @param recorder: the recorder 
+	 * @param recorderState: the recorder state
 	 */
-	public TypeRecordable(EditorEngine engine, IHM ihm, Recorder recorder) {
-		super(engine, ihm);
+	public TypeRecordable(EditorEngine engine, IHM ihm, Recorder recorder, RecorderEngine recorderState) {
+		super(engine, ihm, recorderState);
 		this.recorder = recorder;
 	}
 	
@@ -53,11 +54,12 @@ public class TypeRecordable  extends Type implements CommandRecordable {
 	}
 	
 	/**
-	 * restore()<br/>
-	 * restore the states (command executed and text)
+	 * replay()<br/>
+	 * replay the command with the states (command executed and text)
 	 */
 	@Override
-	public void restore(Memento m) {
+	public void replay(Memento m) {
 		ihm.getListener().setLastChar(m.getText());
+		super.execute();
 	}
 }

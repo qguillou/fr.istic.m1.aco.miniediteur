@@ -17,8 +17,8 @@ public interface CommandRecordable extends Command {
 	public Memento save();
 	
 	/**
-	 * restore()<br/>
+	 * replay()<br/>
 	 * restore the states (command executed and text)
 	 */
-	public void restore(Memento m);
+	public void replay(Memento m);
 }
