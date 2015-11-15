@@ -1,9 +1,9 @@
 package command;
 
-import memento.MementoEngine;
 import invoker.IHM;
+import memento.MementoEngine;
 import receiver.EditorEngine;
-import receiver.RecorderEngine;
+import caretaker.Recorder;
 
 /**
  * Redo<br/>
@@ -16,14 +16,14 @@ public class Redo implements Command {
 	
 	protected IHM ihm;
 	protected EditorEngine engine;
-	private RecorderEngine recorder;
+	private Recorder recorder;
 	
 	/**
 	 * Redo() <br/>
 	 * Construct the Command Redo
 	 * @param engine the engine which will receive the command
 	 */
-	public Redo(EditorEngine engine, IHM ihm, RecorderEngine recorder) {
+	public Redo(EditorEngine engine, IHM ihm, Recorder recorder) {
 		this.engine = engine;
 		this.ihm = ihm;
 		this.recorder = recorder;

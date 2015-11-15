@@ -1,13 +1,13 @@
 package command;
 
-import memento.MementoEngine;
 import invoker.IHM;
+import memento.MementoEngine;
 import receiver.Buffer;
 import receiver.ClipBoard;
 import receiver.EditorEngine;
 import receiver.EngineImpl;
-import receiver.RecorderEngine;
 import receiver.Selection;
+import caretaker.Recorder;
 
 /**
  * Undo<br/>
@@ -20,14 +20,14 @@ public class Undo implements Command {
 	
 	protected IHM ihm;
 	protected EditorEngine engine;
-	private RecorderEngine recorder;
+	private Recorder recorder;
 	
 	/**
 	 * Undo() <br/>
 	 * Construct the Command Undo
 	 * @param engine the engine which will receive the command
 	 */
-	public Undo(EditorEngine engine, IHM ihm, RecorderEngine recorder) {
+	public Undo(EditorEngine engine, IHM ihm, Recorder recorder) {
 		this.engine = engine;
 		this.ihm = ihm;
 		this.recorder = recorder;

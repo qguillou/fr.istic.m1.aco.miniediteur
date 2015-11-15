@@ -18,7 +18,6 @@ import receiver.Buffer;
 import receiver.ClipBoard;
 import receiver.EditorEngine;
 import receiver.EngineImpl;
-import receiver.RecorderEngine;
 import receiver.Selection;
 import caretaker.Recorder;
 import caretaker.RecorderImpl;
@@ -43,18 +42,16 @@ public class Editeur {
 		Recorder recorder = new RecorderImpl();
 		listener.setRecorder(recorder);
 		
-		RecorderEngine recorderState = new RecorderEngine();
-		
 		CommandRecordable copy = new CopyRecordable(engine, ihm, recorder);
 		CommandRecordable cut = new CutRecordable(engine, ihm, recorder);
 		CommandRecordable erase = new EraseRecordable(engine, ihm, recorder);
-		CommandRecordable paste = new PasteRecordable(engine, ihm, recorder, recorderState);
-		Command select = new Select(engine, ihm);
-		CommandRecordable type = new TypeRecordable(engine, ihm, recorder, recorderState);
+		CommandRecordable paste = new PasteRecordable(engine, ihm, recorder);
+		Command select = new Select(engine, ihm, recorder);
+		CommandRecordable type = new TypeRecordable(engine, ihm, recorder);
 		CommandRecordable delete = new DeleteRecordable(engine, ihm, recorder);
 		Command replay = new Replay(engine, ihm, recorder);
-		Command undo = new Undo(engine, ihm, recorderState);
-		Command redo = new Redo(engine, ihm, recorderState);
+		Command undo = new Undo(engine, ihm, recorder);
+		Command redo = new Redo(engine, ihm, recorder);
 		
 		Map<String, Command> commands = new HashMap<String, Command>();
 		commands.put("copy", copy);

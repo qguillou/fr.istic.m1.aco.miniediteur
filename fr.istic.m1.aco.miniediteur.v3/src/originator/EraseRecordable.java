@@ -14,8 +14,6 @@ import command.Erase;
  */
 public class EraseRecordable  extends Erase implements CommandRecordable {
 	
-	private Recorder recorder;
-	
 	/**
 	 * EraseRecordable() - Constructor<br/>
 	 * initialize
@@ -24,8 +22,7 @@ public class EraseRecordable  extends Erase implements CommandRecordable {
 	 * @param recorder: the recorder 
 	 */
 	public EraseRecordable(EditorEngine engine, IHM ihm, Recorder recorder) {
-		super(engine, ihm);
-		this.recorder = recorder;
+		super(engine, ihm, recorder);
 	}
 	
 	/**

@@ -14,9 +14,7 @@ import command.Cut;
  * @version 2.0
  */
 public class CutRecordable  extends Cut implements CommandRecordable {
-	
-	private Recorder recorder;
-	
+		
 	/**
 	 * CutRecordable() - Constructor<br/>
 	 * initialize
@@ -25,8 +23,7 @@ public class CutRecordable  extends Cut implements CommandRecordable {
 	 * @param recorder: the recorder 
 	 */
 	public CutRecordable(EditorEngine engine, IHM ihm, Recorder recorder) {
-		super(engine, ihm);
-		this.recorder = recorder;
+		super(engine, ihm, recorder);
 	}
 	
 	/**

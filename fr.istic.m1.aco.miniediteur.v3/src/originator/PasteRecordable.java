@@ -1,12 +1,12 @@
 package originator;
 
-import caretaker.Recorder;
 import invoker.IHM;
-import receiver.EditorEngine;
-import receiver.RecorderEngine;
-import command.Paste;
 import memento.Memento;
 import memento.MementoPaste;
+import receiver.EditorEngine;
+import caretaker.Recorder;
+
+import command.Paste;
 
 /**
  * PasteRecordable
@@ -14,8 +14,6 @@ import memento.MementoPaste;
  * @version 2.0
  */
 public class PasteRecordable  extends Paste implements CommandRecordable {
-	
-	private Recorder recorder;
 	
 	/**
 	 * PasteRecordable() - Constructor<br/>
@@ -25,9 +23,8 @@ public class PasteRecordable  extends Paste implements CommandRecordable {
 	 * @param recorder: the recorder 
 	 * @param recorderState: the engine recorder
 	 */
-	public PasteRecordable(EditorEngine engine, IHM ihm, Recorder recorder, RecorderEngine recorderState) {
-		super(engine, ihm, recorderState);
-		this.recorder = recorder;
+	public PasteRecordable(EditorEngine engine, IHM ihm, Recorder recorder) {
+		super(engine, ihm, recorder);
 	}
 	
 	/**

@@ -1,9 +1,9 @@
 package command;
 
-import memento.MementoEngine;
 import invoker.IHM;
+import memento.MementoEngine;
 import receiver.EditorEngine;
-import receiver.RecorderEngine;
+import caretaker.Recorder;
 
 /**
  * Type<br/>
@@ -16,17 +16,17 @@ public class Type implements Command {
 	
 	protected IHM ihm;
 	protected EditorEngine engine;
-	private RecorderEngine recorder;
+	protected Recorder recorder;
 	
 	/**
 	 * Type() <br/>
 	 * Construct the Command Type
 	 * @param engine the engine which will receive the command
 	 */
-	public Type(EditorEngine engine, IHM ihm, RecorderEngine recorderState) {
+	public Type(EditorEngine engine, IHM ihm, Recorder recorder) {
 		this.engine = engine;
 		this.ihm = ihm;
-		this.recorder = recorderState;
+		this.recorder = recorder;
 	}
 	
 	/**

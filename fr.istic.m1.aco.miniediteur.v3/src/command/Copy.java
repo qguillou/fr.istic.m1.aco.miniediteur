@@ -1,7 +1,9 @@
 package command;
 
 import invoker.IHM;
+import memento.MementoEngine;
 import receiver.EditorEngine;
+import caretaker.Recorder;
 
 /**
  * Copy<br/>
@@ -14,6 +16,7 @@ public class Copy implements Command {
 
 	private IHM ihm;
 	protected EditorEngine engine;
+	protected Recorder recorder;
 	
 	/**
 	 * Copy() <br/>
@@ -21,9 +24,10 @@ public class Copy implements Command {
 	 * @param engine the engine which will receive the command
 	 * @param ihm the ihm
 	 */
-	public Copy(EditorEngine engine, IHM ihm) {
+	public Copy(EditorEngine engine, IHM ihm, Recorder recorder) {
 		this.engine = engine;
 		this.ihm = ihm;
+		this.recorder = recorder;
 	}
 	
 	/**
@@ -35,5 +39,8 @@ public class Copy implements Command {
 		ihm.setCommandText("Ctrl + C");
 		engine.copy();
 		ihm.getTextArea().update(engine.getText(), engine.getSelectionStart(), engine.getSelectionStart()+engine.getSelectionLength());
+	
+		MementoEngine m = new MementoEngine(engine.getState());
+		recorder.save(m);
 	}
 }

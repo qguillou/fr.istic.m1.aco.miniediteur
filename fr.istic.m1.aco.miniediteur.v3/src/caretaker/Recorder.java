@@ -2,7 +2,7 @@ package caretaker;
 
 import java.util.Map;
 
-
+import memento.MementoEngine;
 import originator.CommandRecordable;
 
 /**
@@ -44,4 +44,10 @@ public interface Recorder {
 	 * @param commands: a map which contains all commands, the key is the name of command
 	 */
 	public void setCommand(Map<String, CommandRecordable> commands);
+	
+	public void save(MementoEngine m);
+	
+	public MementoEngine undo();
+	
+	public MementoEngine redo();
 }

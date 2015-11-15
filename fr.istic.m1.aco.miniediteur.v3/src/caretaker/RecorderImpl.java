@@ -2,10 +2,13 @@ package caretaker;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.EmptyStackException;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Stack;
 
 import memento.Memento;
+import memento.MementoEngine;
 import originator.CommandRecordable;
 
 /**
@@ -19,6 +22,9 @@ public class RecorderImpl implements Recorder {
 	private Collection<Memento> mementos;
 	private boolean recording;
 	
+	private Stack<MementoEngine> sUndo;
+	private Stack<MementoEngine> sRedo;
+	
 	/**
 	 * RecorderImpl() <br/>
 	 * Construct the Recorder
@@ -26,6 +32,9 @@ public class RecorderImpl implements Recorder {
 	public RecorderImpl() {
 		mementos = new ArrayList<Memento>();
 		recording = false;
+		
+		sUndo = new Stack<MementoEngine>();
+		sRedo = new Stack<MementoEngine>();
 	}
 	
 	/**
@@ -82,5 +91,29 @@ public class RecorderImpl implements Recorder {
 	@Override
 	public void setCommand(Map<String, CommandRecordable> commands) {
 		this.commands = commands;
+	}
+	
+	public void save(MementoEngine m) {
+		sUndo.push(m);
+		sRedo.clear();
+	}
+	
+	public MementoEngine undo() {
+		try {
+			sRedo.push(sUndo.pop());
+		} catch(EmptyStackException ese){}
+		
+		if(sUndo.isEmpty())
+			return null;
+		
+		return sUndo.peek();
+	}
+	
+	public MementoEngine redo() {
+		if(sRedo.isEmpty())
+			return null;
+		
+		sUndo.push(sRedo.peek());
+		return sRedo.pop();
 	}
 }

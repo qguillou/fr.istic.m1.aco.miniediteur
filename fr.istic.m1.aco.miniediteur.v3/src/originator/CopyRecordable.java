@@ -14,19 +14,17 @@ import command.Copy;
  * @version 2.0
  */
 public class CopyRecordable  extends Copy implements CommandRecordable {
-	
-	private Recorder recorder;
-	
+		
 	/**
 	 * CopyRecordable() - Constructor<br/>
 	 * initialize
+	 * @param recorderState 
 	 * @param engine: the editor engine
 	 * @param ihm: the ihm
 	 * @param recorder: the recorder 
 	 */
 	public CopyRecordable(EditorEngine engine, IHM ihm, Recorder recorder) {
-		super(engine, ihm);
-		this.recorder = recorder;
+		super(engine, ihm, recorder);
 	}
 	
 	/**

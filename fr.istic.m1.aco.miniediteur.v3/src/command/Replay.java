@@ -1,5 +1,6 @@
 package command;
 
+import memento.MementoEngine;
 import caretaker.Recorder;
 import invoker.IHM;
 import receiver.EditorEngine;
@@ -42,6 +43,9 @@ public class Replay implements Command  {
 		}
 		else 
 			ihm.setCommandText("Error - Recording ON can't replay");
+
+		MementoEngine m = new MementoEngine(engine.getState());
+		recorder.save(m);
 	}
 
 }

@@ -1,5 +1,7 @@
 package command;
 
+import memento.MementoEngine;
+import caretaker.Recorder;
 import invoker.IHM;
 import receiver.EditorEngine;
 
@@ -14,15 +16,17 @@ public class Delete implements Command {
 
 	private IHM ihm;
 	protected EditorEngine engine;
+	protected Recorder recorder;
 	
 	/**
 	 * Delete() <br/>
 	 * Construct the Command Delete
 	 * @param engine the engine which will receive the command
 	 */
-	public Delete(EditorEngine engine, IHM ihm) {
+	public Delete(EditorEngine engine, IHM ihm, Recorder recorder) {
 		this.engine = engine;
 		this.ihm = ihm;
+		this.recorder = recorder;
 	}
 	
 	/**
@@ -34,5 +38,8 @@ public class Delete implements Command {
 		ihm.setCommandText("DELETE");
 		engine.delete();
 		ihm.getTextArea().update(engine.getText(), engine.getSelectionStart(), engine.getSelectionStart()+engine.getSelectionLength());
+	
+		MementoEngine m = new MementoEngine(engine.getState());
+		recorder.save(m);
 	}
 }

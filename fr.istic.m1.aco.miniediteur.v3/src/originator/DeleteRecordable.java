@@ -14,9 +14,7 @@ import command.Delete;
  * @version 2.0
  */
 public class DeleteRecordable  extends Delete implements CommandRecordable {
-	
-	private Recorder recorder;
-	
+		
 	/**
 	 * DeleteRecordable() - Constructor<br/>
 	 * initialize
@@ -25,8 +23,7 @@ public class DeleteRecordable  extends Delete implements CommandRecordable {
 	 * @param recorder: the recorder 
 	 */
 	public DeleteRecordable(EditorEngine engine, IHM ihm, Recorder recorder) {
-		super(engine, ihm);
-		this.recorder = recorder;
+		super(engine, ihm, recorder);
 	}
 	
 	/**

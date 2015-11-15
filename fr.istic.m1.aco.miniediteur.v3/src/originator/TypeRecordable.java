@@ -4,8 +4,8 @@ import invoker.IHM;
 import memento.Memento;
 import memento.MementoType;
 import receiver.EditorEngine;
-import receiver.RecorderEngine;
 import caretaker.Recorder;
+
 import command.Type;
 
 /**
@@ -15,8 +15,6 @@ import command.Type;
  */
 public class TypeRecordable  extends Type implements CommandRecordable {
 	
-	private Recorder recorder;
-	
 	/**
 	 * TypeRecordable() - Constructor<br/>
 	 * initialize
@@ -25,9 +23,8 @@ public class TypeRecordable  extends Type implements CommandRecordable {
 	 * @param recorder: the recorder 
 	 * @param recorderState: the recorder state
 	 */
-	public TypeRecordable(EditorEngine engine, IHM ihm, Recorder recorder, RecorderEngine recorderState) {
-		super(engine, ihm, recorderState);
-		this.recorder = recorder;
+	public TypeRecordable(EditorEngine engine, IHM ihm, Recorder recorder) {
+		super(engine, ihm, recorder);
 	}
 	
 	/**

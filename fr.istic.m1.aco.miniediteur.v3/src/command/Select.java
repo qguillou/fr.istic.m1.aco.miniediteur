@@ -1,5 +1,7 @@
 package command;
 
+import memento.MementoEngine;
+import caretaker.Recorder;
 import invoker.IHM;
 import receiver.EditorEngine;
 
@@ -14,15 +16,17 @@ public class Select implements Command {
 
 	private IHM ihm;
 	private EditorEngine engine;
+	private Recorder recorder;
 	
 	/**
 	 * Select() <br/>
 	 * Construct the Command Select
 	 * @param engine the engine which will receive the command
 	 */
-	public Select(EditorEngine engine, IHM ihm) {
+	public Select(EditorEngine engine, IHM ihm, Recorder recorder) {
 		this.engine = engine;
 		this.ihm = ihm;
+		this.recorder = recorder;
 	}
 	
 	/**
@@ -35,5 +39,8 @@ public class Select implements Command {
 		int length = ihm.getTextArea().getSelectionEnd() - start;
 		engine.select(start, length);
 		ihm.getTextArea().update(engine.getText(), engine.getSelectionStart(), engine.getSelectionStart()+engine.getSelectionLength());
+
+		MementoEngine m = new MementoEngine(engine.getState());
+		recorder.save(m);
 	}
 }
