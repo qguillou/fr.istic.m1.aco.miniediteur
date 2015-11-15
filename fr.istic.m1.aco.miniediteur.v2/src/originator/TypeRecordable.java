@@ -53,11 +53,12 @@ public class TypeRecordable  extends Type implements CommandRecordable {
 	}
 	
 	/**
-	 * restore()<br/>
-	 * restore the states (command executed and text)
+	 * replay()<br/>
+	 * replay the command with the states (command executed and text)
 	 */
 	@Override
-	public void restore(Memento m) {
+	public void replay(Memento m) {
 		ihm.getListener().setLastChar(m.getText());
+		super.execute();
 	}
 }

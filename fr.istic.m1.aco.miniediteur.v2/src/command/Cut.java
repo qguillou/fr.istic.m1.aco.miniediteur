@@ -13,7 +13,7 @@ import receiver.EditorEngine;
 public class Cut implements Command {
 	
 	private IHM ihm;
-	private EditorEngine engine;
+	protected EditorEngine engine;
 	
 	/**
 	 * Cut() <br/>
