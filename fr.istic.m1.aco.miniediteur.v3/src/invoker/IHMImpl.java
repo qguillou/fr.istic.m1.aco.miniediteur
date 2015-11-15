@@ -165,14 +165,14 @@ public class IHMImpl extends JFrame implements IHM {
 		ctrlXKeyStroke = KeyStroke.getKeyStroke("control Z");
 	    item.setAccelerator(ctrlXKeyStroke);
 		item.setBackground(Color.WHITE);
-		//item.setIcon(new ImageIcon("image/play.png"));
+		item.setIcon(new ImageIcon("image/undo.png"));
 		item.addActionListener(listener);
 		menu_edit.add(item);
 		item = new JMenuItem("Redo");
 		ctrlXKeyStroke = KeyStroke.getKeyStroke("control Y");
 	    item.setAccelerator(ctrlXKeyStroke);
 		item.setBackground(Color.WHITE);
-		//item.setIcon(new ImageIcon("image/play.png"));
+		item.setIcon(new ImageIcon("image/redo.png"));
 		item.addActionListener(listener);
 		menu_edit.add(item);
 		menu_edit.setBackground(Color.WHITE);
@@ -207,6 +207,8 @@ public class IHMImpl extends JFrame implements IHM {
 		JButton erase = new JButton("Erase");
 		JButton record = new JButton("Record");
 		JButton replay = new JButton("Replay");
+		JButton undo = new JButton("Undo");
+		JButton redo = new JButton("Redo");
 		
 		// Adding buttons to the tool bar
 		tool.addSeparator(new Dimension(20, 0));
@@ -218,6 +220,9 @@ public class IHMImpl extends JFrame implements IHM {
 		tool.addSeparator(new Dimension(40, 0));
 		tool.add(record);
 		tool.add(replay);
+		tool.addSeparator(new Dimension(40, 0));
+		tool.add(undo);
+		tool.add(redo);
 		
 		//Custom toolbar
 		tool.setFloatable(false);
@@ -227,6 +232,8 @@ public class IHMImpl extends JFrame implements IHM {
 		erase.setIcon(new ImageIcon("image/erase48.png"));
 		record.setIcon(new ImageIcon("image/record48.png"));
 		replay.setIcon(new ImageIcon("image/play48.png"));
+		undo.setIcon(new ImageIcon("image/undo48.png"));
+		redo.setIcon(new ImageIcon("image/redo48.png"));
 		
 		cut.setBackground(Color.WHITE);
 		copy.setBackground(Color.WHITE);
@@ -234,6 +241,8 @@ public class IHMImpl extends JFrame implements IHM {
 		erase.setBackground(Color.WHITE);
 		record.setBackground(Color.WHITE);
 		replay.setBackground(Color.WHITE);
+		undo.setBackground(Color.WHITE);
+		redo.setBackground(Color.WHITE);
 		
 		cut.setVerticalTextPosition(SwingConstants.BOTTOM);
 	    cut.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -247,6 +256,10 @@ public class IHMImpl extends JFrame implements IHM {
 	    record.setHorizontalTextPosition(SwingConstants.CENTER);
 	    replay.setVerticalTextPosition(SwingConstants.BOTTOM);
 	    replay.setHorizontalTextPosition(SwingConstants.CENTER);
+	    undo.setVerticalTextPosition(SwingConstants.BOTTOM);
+	    undo.setHorizontalTextPosition(SwingConstants.CENTER);
+	    redo.setVerticalTextPosition(SwingConstants.BOTTOM);
+	    redo.setHorizontalTextPosition(SwingConstants.CENTER);
 	    
 	    cut.addActionListener(listener);
 	    copy.addActionListener(listener);
@@ -254,6 +267,8 @@ public class IHMImpl extends JFrame implements IHM {
 	    erase.addActionListener(listener);
 	    record.addActionListener(listener);
 	    replay.addActionListener(listener);
+	    undo.addActionListener(listener);
+	    redo.addActionListener(listener);
 	}
 	
 	/**

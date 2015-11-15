@@ -1,9 +1,8 @@
 package command;
 
-import memento.MementoEngine;
-import caretaker.Recorder;
 import invoker.IHM;
 import receiver.EditorEngine;
+import caretaker.Recorder;
 
 /**
  * Select <br/>
@@ -39,8 +38,5 @@ public class Select implements Command {
 		int length = ihm.getTextArea().getSelectionEnd() - start;
 		engine.select(start, length);
 		ihm.getTextArea().update(engine.getText(), engine.getSelectionStart(), engine.getSelectionStart()+engine.getSelectionLength());
-
-		MementoEngine m = new MementoEngine(engine.getState());
-		recorder.save(m);
 	}
 }
