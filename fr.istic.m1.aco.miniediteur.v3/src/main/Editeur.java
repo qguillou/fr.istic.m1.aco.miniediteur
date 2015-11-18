@@ -46,7 +46,7 @@ public class Editeur {
 		CommandRecordable cut = new CutRecordable(engine, ihm, recorder);
 		CommandRecordable erase = new EraseRecordable(engine, ihm, recorder);
 		CommandRecordable paste = new PasteRecordable(engine, ihm, recorder);
-		Command select = new Select(engine, ihm, recorder);
+		Command select = new Select(engine, ihm);
 		CommandRecordable type = new TypeRecordable(engine, ihm, recorder);
 		CommandRecordable delete = new DeleteRecordable(engine, ihm, recorder);
 		Command replay = new Replay(engine, ihm, recorder);

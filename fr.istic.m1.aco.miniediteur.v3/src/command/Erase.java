@@ -39,7 +39,7 @@ public class Erase implements Command {
 		engine.erase();
 		ihm.getTextArea().update(engine.getText(), engine.getSelectionStart(), engine.getSelectionStart()+engine.getSelectionLength());
 
-		MementoEngine m = new MementoEngine(engine.getState());
+		MementoEngine m = new MementoEngine(engine.getText(), engine.getSelectionStart(), engine.getSelectionLength());
 		recorder.save(m);
 	}
 }

@@ -1,7 +1,6 @@
 package command;
 
 import invoker.IHM;
-import memento.MementoEngine;
 import receiver.EditorEngine;
 import caretaker.Recorder;
 
@@ -39,8 +38,5 @@ public class Cut implements Command {
 		ihm.setCommandText("Ctrl + X");
 		engine.cut();
 		ihm.getTextArea().update(engine.getText(), engine.getSelectionStart(), engine.getSelectionStart()+engine.getSelectionLength());
-	
-		MementoEngine m = new MementoEngine(engine.getState());
-		recorder.save(m);
 	}
 }

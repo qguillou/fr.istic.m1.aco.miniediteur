@@ -82,7 +82,7 @@ public interface EditorEngine {
 	 */
 	public ClipBoard getClipboard();
 	
-	public EditorEngine getState();
-
-	public void setState(EditorEngine e);
+	public Buffer getBuffer();
+	
+	public Selection getSelection();
 }

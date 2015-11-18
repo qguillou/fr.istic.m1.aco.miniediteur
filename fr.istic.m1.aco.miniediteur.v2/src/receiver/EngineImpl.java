@@ -115,7 +115,7 @@ public class EngineImpl implements EditorEngine  {
 		int end = start + selection.getLength();
 		
 		buffer.type(c, start, end);
-		selection.setStart(start + 1);
+		selection.setStart(start + c.length());
 		selection.setLength(0);
 	}
 	

@@ -2,11 +2,7 @@ package command;
 
 import invoker.IHM;
 import memento.MementoEngine;
-import receiver.Buffer;
-import receiver.ClipBoard;
 import receiver.EditorEngine;
-import receiver.EngineImpl;
-import receiver.Selection;
 import caretaker.Recorder;
 
 /**
@@ -43,11 +39,15 @@ public class Undo implements Command {
 		
 		MementoEngine m = recorder.undo();
 		try {
-			engine.setState(m.getState());
+			engine.getBuffer().setText(m.getStateBuffer());
+			engine.getSelection().setStart(m.getStateStart());
+			engine.getSelection().setLength(m.getStateLength());
 		}
 		catch(NullPointerException npe){
 			ihm.setCommandText("Ctrl + Z - Nothing to do");
-			engine.setState(new MementoEngine(new EngineImpl(new Selection(), new ClipBoard(), new Buffer())).getState());
+			engine.getBuffer().setText("");
+			engine.getSelection().setStart(0);
+			engine.getSelection().setLength(0);
 		}
 		ihm.getTextArea().update(engine.getText(), engine.getSelectionStart(), engine.getSelectionStart()+engine.getSelectionLength());
 	}

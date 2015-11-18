@@ -44,7 +44,7 @@ public class Replay implements Command  {
 		else 
 			ihm.setCommandText("Error - Recording ON can't replay");
 
-		MementoEngine m = new MementoEngine(engine.getState());
+		MementoEngine m = new MementoEngine(engine.getText(), engine.getSelectionStart(), engine.getSelectionLength());
 		recorder.save(m);
 	}
 

@@ -2,7 +2,6 @@ package command;
 
 import invoker.IHM;
 import receiver.EditorEngine;
-import caretaker.Recorder;
 
 /**
  * Select <br/>
@@ -15,17 +14,15 @@ public class Select implements Command {
 
 	private IHM ihm;
 	private EditorEngine engine;
-	private Recorder recorder;
 	
 	/**
 	 * Select() <br/>
 	 * Construct the Command Select
 	 * @param engine the engine which will receive the command
 	 */
-	public Select(EditorEngine engine, IHM ihm, Recorder recorder) {
+	public Select(EditorEngine engine, IHM ihm) {
 		this.engine = engine;
 		this.ihm = ihm;
-		this.recorder = recorder;
 	}
 	
 	/**

@@ -39,7 +39,9 @@ public class Redo implements Command {
 		
 		MementoEngine m = recorder.redo();
 		try {
-			engine.setState(m.getState());
+			engine.getBuffer().setText(m.getStateBuffer());
+			engine.getSelection().setStart(m.getStateStart());
+			engine.getSelection().setLength(m.getStateLength());
 		}
 		catch(NullPointerException npe){
 			ihm.setCommandText("Ctrl + Y - Nothing to do");

@@ -1,16 +1,27 @@
 package memento;
 
-import receiver.EditorEngine;
 
 public class MementoEngine {
 	
-	private EditorEngine engine;
+	private String stateBuffer;
+	private int stateStart;
+	private int stateLength;
 	
-	public MementoEngine(EditorEngine e) {
-		engine = e;
+	public MementoEngine(String text, int start, int length) {
+		stateBuffer = text;
+		stateStart = start;
+		stateLength	= length;
 	}
 	
-	public EditorEngine getState() {
-		return engine;
+	public String getStateBuffer() {
+		return stateBuffer;
+	}
+	
+	public int getStateStart() {
+		return stateStart;
+	}
+	
+	public int getStateLength() {
+		return stateLength;
 	}
 }
