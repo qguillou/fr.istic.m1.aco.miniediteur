@@ -170,12 +170,22 @@ public class EngineImpl implements EditorEngine  {
 	public ClipBoard getClipboard() {
 		return clipboard;
 	}
-
+	
+	/**
+	 * getBuffer() <br/>
+	 * get the buffer
+	 * @return Buffer: the buffer
+	 */
 	@Override
 	public Buffer getBuffer() {
 		return buffer;
 	}
-
+	
+	/**
+	 * getSelection() <br/>
+	 * get the selection
+	 * @return Selection: the Selection
+	 */
 	@Override
 	public Selection getSelection() {
 		return selection;

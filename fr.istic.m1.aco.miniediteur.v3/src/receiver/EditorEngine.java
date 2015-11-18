@@ -82,7 +82,17 @@ public interface EditorEngine {
 	 */
 	public ClipBoard getClipboard();
 	
+	/**
+	 * getBuffer() <br/>
+	 * get the buffer
+	 * @return Buffer: the buffer
+	 */
 	public Buffer getBuffer();
 	
+	/**
+	 * getSelection() <br/>
+	 * get the selection
+	 * @return Selection: the Selection
+	 */
 	public Selection getSelection();
 }
