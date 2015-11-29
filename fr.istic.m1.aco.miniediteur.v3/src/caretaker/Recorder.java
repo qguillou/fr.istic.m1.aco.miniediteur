@@ -45,9 +45,24 @@ public interface Recorder {
 	 */
 	public void setCommand(Map<String, CommandRecordable> commands);
 	
+	/**
+	 * save() <br/>
+	 * Save the memento
+	 * @param m the memento to save
+	 */
 	public void save(MementoEngine m);
 	
+	/**
+	 * undo() <br/>
+	 * Undo an action
+	 * @return the before state of engine
+	 */
 	public MementoEngine undo();
 	
+	/**
+	 * Redo() <br/>
+	 * Redo an action
+	 * @return the after state of engine
+	 */
 	public MementoEngine redo();
 }

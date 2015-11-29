@@ -93,11 +93,21 @@ public class RecorderImpl implements Recorder {
 		this.commands = commands;
 	}
 	
+	/**
+	 * save() <br/>
+	 * Save the memento
+	 * @param m the memento to save
+	 */
 	public void save(MementoEngine m) {
 		sUndo.push(m);
 		sRedo.clear();
 	}
 	
+	/**
+	 * undo() <br/>
+	 * Undo an action
+	 * @return the before state of engine
+	 */
 	public MementoEngine undo() {
 		try {
 			sRedo.push(sUndo.pop());
